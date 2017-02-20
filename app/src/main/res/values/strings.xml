@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ChelasGpz</string>
+    <string name="Email_Text">Correo</string>
+    <string name="Password_Text">Contraseña</string>
+    <string name="Registrar">Aun no te Registras? ,</string>
+    <string name="Registrar1">Registrate</string>
+    <string name="facebook_app_id">1916374748585803</string>
+
+    <string name="Email_error">Correo Incorrecto</string>
+    <string name="Clave_error">Error Password</string>
+
+</resources>
