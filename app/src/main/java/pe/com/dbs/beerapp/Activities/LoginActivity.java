@@ -1,8 +1,10 @@
 package pe.com.dbs.beerapp.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +21,6 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import pe.com.dbs.beerapp.R;
@@ -28,13 +29,12 @@ public class LoginActivity extends AppCompatActivity {
     private LoginButton _LoginButton;
     private CallbackManager _CallBackManager;
     private TextView _emailText,_passwordText;
-
-
+    private Button _Button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        _Button = (Button) findViewById(R.id._LoginButton);
         _CallBackManager=CallbackManager.Factory.create();
         _LoginButton = (LoginButton) findViewById(R.id.loginButton);
         _emailText=(TextView)findViewById(R.id.EditTextEmail);
@@ -82,8 +82,13 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.com_facebook_internet_permission_error_message, Toast.LENGTH_SHORT).show();
             }
         });
+        _Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(view.getContext(), BarActivities.class));
+            }
+        });
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -117,6 +122,5 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
     public void onBackPressed() {
-
     }
 }
