@@ -11,6 +11,11 @@
             <corners
                 android:bottomLeftRadius="3dp"
                 android:bottomRightRadius="3dp" />
+            <gradient
+                android:startColor="#FFFFFF"
+                android:endColor="#C8C8C8"
+                android:type="linear"
+                android:angle="270"/>
         </shape>
     </item>
 </layer-list>
