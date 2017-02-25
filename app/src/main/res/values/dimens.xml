@@ -5,4 +5,10 @@
 
     <dimen name="Edit_text_height">42dp</dimen>
     <dimen name="Edit_text_margin">10dp</dimen>
+
+    <dimen name="headerbar_elevation">4dp</dimen>
+    <dimen name="card_margin">16dp</dimen>
+    <dimen name="size_fab">56dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="avatar_size">40dp</dimen>
 </resources>
