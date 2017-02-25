@@ -8,5 +8,6 @@
 
     <string name="Email_error">Correo Incorrecto</string>
     <string name="Clave_error">Error Password</string>
+    <string name="login">Ingresar</string>
 
 </resources>
