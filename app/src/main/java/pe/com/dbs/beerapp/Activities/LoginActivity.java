@@ -35,8 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         _Button = (Button) findViewById(R.id._LoginButton);
+        _emailText = (TextView) findViewById(R.id.EditTextEmail);
+        _passwordText = (TextView) findViewById(R.id.EditTextPassword);
         _CallBackManager=CallbackManager.Factory.create();
-        _LoginButton = (LoginButton) findViewById(R.id.loginButton);
+        _LoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
         _emailText=(TextView)findViewById(R.id.EditTextEmail);
         _passwordText=(TextView)findViewById(R.id.EditTextPassword);
         _LoginButton.setReadPermissions(Arrays.asList(
