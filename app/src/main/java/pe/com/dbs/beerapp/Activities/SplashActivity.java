@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.Activities;
+package pe.com.dbs.beerapp.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

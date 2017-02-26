@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@android:color/black"
-    tools:context="pe.com.dbs.beerapp.Activities.SplashActivity">
+    tools:context="pe.com.dbs.beerapp.activities.SplashActivity">
 
     <ProgressBar
         android:id="@+id/splash_screen_progress_bar"
