@@ -1,43 +1,47 @@
-package pe.com.dbs.beerapp.activities;
+package pe.com.dbs.beerapp.Activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import pe.com.dbs.beerapp.adapters.BarAdapter;
+import pe.com.dbs.beerapp.Adapters.BarAdapter;
+import pe.com.dbs.beerapp.Models.Bar;
 import pe.com.dbs.beerapp.R;
-import pe.com.dbs.beerapp.models.Bar;
 
 public class BarActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
+    private RecyclerView recycler;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-
+    private RecyclerView.LayoutManager lManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bar_activities);
+        setContentView(R.layout.activity_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         List items = new ArrayList();
         for (int i = 0; i < 30; i++) {
-            Bar bar = new Bar();
-            bar.setName("BAR " + i);
-            bar.setAddress("Distrito " + i);
-            bar.setPhone("Telefono " + i);
-            items.add(bar);
-        }
-        recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        recyclerView.setHasFixedSize(true);
+            items.add(new Bar("BAR " + i, "Distrito " + i, "Telefono " + i));
 
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        }
+        recycler = (RecyclerView) findViewById(R.id.recycler);
+        recycler.setHasFixedSize(true);
+
+        lManager = new LinearLayoutManager(this);
+        recycler.setLayoutManager(lManager);
 
         adapter = new BarAdapter(items);
-        recyclerView.setAdapter(adapter);
+        recycler.setAdapter(adapter);
     }
 
 }
+
+
+

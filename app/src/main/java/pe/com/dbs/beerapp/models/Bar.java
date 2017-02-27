@@ -1,100 +1,41 @@
-package pe.com.dbs.beerapp.models;
+package pe.com.dbs.beerapp.Models;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Time;
+/**
+ * Created by JeralBenites on 25/02/2017.
+ */
 
 public class Bar {
+    private String _Name;
+    private String _Address;
+    private String _Phone;
 
-	private Integer				barId;
+    public Bar(String _Name, String _Address, String _Phone) {
+        this._Name = _Name;
+        this._Address = _Address;
+        this._Phone = _Phone;
+    }
 
-	private String				address;
-/*
-	private Time				hourClose;
+    public String get_Name() {
+        return _Name;
+    }
 
-	private Time				hourOpen;
-*/
-	private BigDecimal			latitude;
+    public void set_Name(String _Name) {
+        this._Name = _Name;
+    }
 
-	private BigDecimal			longitude;
+    public String get_Address() {
+        return _Address;
+    }
 
-	private String				name;
+    public void set_Address(String _Address) {
+        this._Address = _Address;
+    }
 
-	private String				phone;
+    public String get_Phone() {
+        return _Phone;
+    }
 
-	private Integer				state;
-
-	public Integer getBarId() {
-		return barId;
-	}
-
-	public void setBarId(Integer barId) {
-		this.barId = barId;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-/*
-	public Time getHourClose() {
-		return hourClose;
-	}
-
-	public void setHourClose(Time hourClose) {
-		this.hourClose = hourClose;
-	}
-
-	public Time getHourOpen() {
-		return hourOpen;
-	}
-
-	public void setHourOpen(Time hourOpen) {
-		this.hourOpen = hourOpen;
-	}
-*/
-	public BigDecimal getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(BigDecimal latitude) {
-		this.latitude = latitude;
-	}
-
-	public BigDecimal getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(BigDecimal longitude) {
-		this.longitude = longitude;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Integer getState() {
-		return state;
-	}
-
-	public void setState(Integer state) {
-		this.state = state;
-	}
-
+    public void set_Phone(String _Phone) {
+        this._Phone = _Phone;
+    }
 }

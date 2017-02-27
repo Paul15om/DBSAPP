@@ -1,59 +1,65 @@
-package pe.com.dbs.beerapp.models;
+package pe.com.dbs.beerapp.Models;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class Customer implements Serializable {
+/**
+ * Created by JeralBenites on 26/02/2017.
+ */
 
-	private static final long	serialVersionUID	= 1L;
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class Customer {
 
-	private Integer				customerId;
+    private Integer customerId;
+    private String pass;
+    private String age;
+    private String email;
+    private Integer state;
 
-	private String				age;
+    public Customer(String age, Integer customerId, String email, String pass, Integer state) {
+        this.age = age;
+        this.customerId = customerId;
+        this.email = email;
+        this.pass = pass;
+        this.state = state;
+    }
 
-	private String				email;
+    public String getAge() {
+        return age;
+    }
 
-	private String				pass;
+    public void setAge(String age) {
+        this.age = age;
+    }
 
-	private Integer				state;
+    public Integer getState() {
+        return state;
+    }
 
-	public Integer getCustomerId() {
-		return customerId;
-	}
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
+    public String getPass() {
+        return pass;
+    }
 
-	public String getAge() {
-		return age;
-	}
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
-	public void setAge(String age) {
-		this.age = age;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public Integer getCustomerId() {
+        return customerId;
+    }
 
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public Integer getState() {
-		return state;
-	}
-
-	public void setState(Integer state) {
-		this.state = state;
-	}
-
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
 }

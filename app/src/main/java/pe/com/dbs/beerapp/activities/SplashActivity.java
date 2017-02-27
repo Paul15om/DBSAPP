@@ -1,10 +1,9 @@
-package pe.com.dbs.beerapp.activities;
+package pe.com.dbs.beerapp.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ProgressBar;
-
 
 import java.util.Random;
 
@@ -42,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startApp() {
-        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+        finish();
     }
 }

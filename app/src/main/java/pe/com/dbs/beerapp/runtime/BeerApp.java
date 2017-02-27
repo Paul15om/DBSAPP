@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.runtime;
+package pe.com.dbs.beerapp.Clases;
 
 import android.app.Application;
 
@@ -10,13 +10,10 @@ import com.facebook.appevents.AppEventsLogger;
  */
 
 public class BeerApp extends Application {
-
-    @Override
     public void onCreate(){
         super.onCreate();
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
 
     }
-
 }

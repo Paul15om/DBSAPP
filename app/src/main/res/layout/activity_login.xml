@@ -1,76 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+
     android:fillViewport="true"
-    android:background="@drawable/holi">
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-        <LinearLayout android:id="@+id/header"
-            android:layout_width="fill_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="35dp"
-            android:paddingBottom="20dp">
-            <pl.droidsonroids.gif.GifImageView
+    android:background="@drawable/holi"
+    tools:context="pe.com.dbs.beerapp.Activities.LoginActivity">
+
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="fill_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="35dp"
+                android:paddingBottom="20dp">
+
+                <pl.droidsonroids.gif.GifImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/logo"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/GifBeer" />
+            </LinearLayout>
+
+
+                <AutoCompleteTextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    style="@style/EditTextStyleTop" />
+
+
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="@+id/login"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    style="@style/EditTextStyleBotton"
+                    android:inputType="textPassword"
+                    android:maxLines="1" />
+
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/logo"
-                android:layout_marginBottom="20dp"
-                android:id="@+id/GifBeer" />
-        </LinearLayout>
-        <LinearLayout android:id="@+id/footer"
-            android:layout_width="fill_parent"
-            android:layout_height="90dip"
-            android:layout_alignParentBottom="true">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/action_sign_in"
+                android:textStyle="bold" />
+
+            <com.facebook.login.widget.LoginButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:id="@+id/loginButtonFacebook" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center">
-                <TextView android:id="@+id/link_to_login1"
+                android:gravity="center"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    android:id="@+id/link_to_login1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Registrar"
                     android:textColor="#025f7c"
-                    android:textSize="20sp"/>
-                <TextView android:id="@+id/link_to_login"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/link_to_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Registrar1"
                     android:textSize="20sp"
-                    android:textColor="#025f7c"/>
+                    android:textColor="#025f7c" />
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dip"
-            android:id="@+id/cuerpo"
-            android:layout_below="@id/header">
-            <EditText
-                android:layout_marginTop="40dp"
-                android:id="@+id/EditTextEmail"
-                style="@style/EditTextStyleTop"/>
-            <EditText
-                android:id="@+id/EditTextPassword"
-                style="@style/EditTextStyleBotton"
-                android:layout_marginBottom="35dp"/>
-            <Button
-                android:id="@+id/_LoginButton"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/login"
-                android:gravity="center"/>
-            <com.facebook.login.widget.LoginButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/loginButtonFacebook">
-            </com.facebook.login.widget.LoginButton>
-        </LinearLayout>
-    </RelativeLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
