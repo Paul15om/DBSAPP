@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.Activities;
+package pe.com.dbs.beerapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,24 +26,28 @@ import java.util.Arrays;
 import pe.com.dbs.beerapp.R;
 
 public class LoginActivity extends AppCompatActivity {
-    private LoginButton _LoginButton;
-    private CallbackManager _CallBackManager;
-    private TextView _emailText,_passwordText;
-    private Button _Button;
+
+    private LoginButton loginButtonFacebook;
+    private CallbackManager callbackManager;
+    private TextView emailText, passwordText;
+    private Button loginButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        _Button = (Button) findViewById(R.id._LoginButton);
-        _emailText = (TextView) findViewById(R.id.EditTextEmail);
-        _passwordText = (TextView) findViewById(R.id.EditTextPassword);
-        _CallBackManager=CallbackManager.Factory.create();
-        _LoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
-        _emailText=(TextView)findViewById(R.id.EditTextEmail);
-        _passwordText=(TextView)findViewById(R.id.EditTextPassword);
-        _LoginButton.setReadPermissions(Arrays.asList(
-                "public_profile", "email", "user_friends"));
-        _LoginButton.registerCallback(_CallBackManager, new FacebookCallback<LoginResult>() {
+
+        loginButton = (Button) findViewById(R.id._LoginButton);
+        emailText = (TextView) findViewById(R.id.EditTextEmail);
+        passwordText = (TextView) findViewById(R.id.EditTextPassword);
+        callbackManager =CallbackManager.Factory.create();
+        loginButtonFacebook = (LoginButton) findViewById(R.id.loginButtonFacebook);
+        emailText =(TextView)findViewById(R.id.EditTextEmail);
+        passwordText =(TextView)findViewById(R.id.EditTextPassword);
+
+        loginButtonFacebook.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
+        loginButtonFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
             @Override
             public void onSuccess(LoginResult loginResult) {
 
@@ -60,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                                     GraphResponse response) {
 
                                 try {
-                                    _emailText.setText(object.getString("email"));
+                                    emailText.setText(object.getString("email"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -84,10 +88,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.com_facebook_internet_permission_error_message, Toast.LENGTH_SHORT).show();
             }
         });
-        _Button.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), BarActivities.class));
+                startActivity(new Intent(view.getContext(), BarActivity.class));
                 finish();
             }
         });
@@ -95,35 +99,39 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        _CallBackManager.onActivityResult(requestCode,resultCode,data);
+        callbackManager.onActivityResult(requestCode,resultCode,data);
     }
-    protected void goMainScreen(){
-        Intent intent =new Intent(this,BarActivities.class);
+    private void goMainScreen(){
+        Intent intent =new Intent(this,BarActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-    protected boolean validate() {
+
+    private boolean validate() {
         boolean valid = true;
 
-        String email = _emailText.getText().toString();
-        String password = _passwordText.getText().toString();
+        String email = emailText.getText().toString();
+        String password = passwordText.getText().toString();
 
         if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            _emailText.setError(getResources().getString(R.string.Email_error));
+            emailText.setError(getResources().getString(R.string.Email_error));
             valid = false;
         } else {
-            _emailText.setError(null);
+            emailText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 4 ) {
-            _passwordText.setError(getResources().getString(R.string.Clave_error));
+            passwordText.setError(getResources().getString(R.string.Clave_error));
             valid = false;
         } else {
-            _passwordText.setError(null);
+            passwordText.setError(null);
         }
 
         return valid;
     }
+
+    @Override
     public void onBackPressed() {
     }
+
 }
