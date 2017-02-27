@@ -5,12 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
+import pe.com.dbs.beerapp.models.Bar;
 
 public class BarActivity extends AppCompatActivity {
     private RecyclerView recycler;
@@ -24,7 +24,7 @@ public class BarActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         List items = new ArrayList();
         for (int i = 0; i < 30; i++) {
-            items.add(new pe.com.dbs.beerapp.models.Bar("BAR " + i, "Distrito " + i, "Telefono " + i));
+            items.add(new Bar("BAR " + i, "Distrito " + i, "Telefono " + i));
 
         }
         recycler = (RecyclerView) findViewById(R.id.recycler);
