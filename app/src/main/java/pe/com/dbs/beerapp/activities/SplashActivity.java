@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.Activities;
+package pe.com.dbs.beerapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import java.util.Random;
 
 import pe.com.dbs.beerapp.R;
+import pe.com.dbs.beerapp.activities.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private ProgressBar _Progress;

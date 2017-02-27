@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.Models;
+package pe.com.dbs.beerapp.models;
 
 /**
  * Created by JeralBenites on 25/02/2017.

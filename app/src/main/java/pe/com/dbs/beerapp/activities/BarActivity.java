@@ -1,8 +1,6 @@
-package pe.com.dbs.beerapp.Activities;
+package pe.com.dbs.beerapp.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +10,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-import pe.com.dbs.beerapp.Adapters.BarAdapter;
-import pe.com.dbs.beerapp.Models.Bar;
 import pe.com.dbs.beerapp.R;
 
 public class BarActivity extends AppCompatActivity {
@@ -28,7 +24,7 @@ public class BarActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         List items = new ArrayList();
         for (int i = 0; i < 30; i++) {
-            items.add(new Bar("BAR " + i, "Distrito " + i, "Telefono " + i));
+            items.add(new pe.com.dbs.beerapp.models.Bar("BAR " + i, "Distrito " + i, "Telefono " + i));
 
         }
         recycler = (RecyclerView) findViewById(R.id.recycler);
@@ -37,7 +33,7 @@ public class BarActivity extends AppCompatActivity {
         lManager = new LinearLayoutManager(this);
         recycler.setLayoutManager(lManager);
 
-        adapter = new BarAdapter(items);
+        adapter = new pe.com.dbs.beerapp.adapters.BarAdapter(items);
         recycler.setAdapter(adapter);
     }
 

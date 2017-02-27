@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.Activities;
+package pe.com.dbs.beerapp.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,13 +34,12 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.Arrays;
 
-import pe.com.dbs.beerapp.Clases.ApiCliente;
-import pe.com.dbs.beerapp.Models.Customer;
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.constants.BarApi;
+import pe.com.dbs.beerapp.models.Customer;
+import pe.com.dbs.beerapp.runtime.ApiCliente;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

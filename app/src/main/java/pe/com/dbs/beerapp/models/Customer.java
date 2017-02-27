@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.Models;
+package pe.com.dbs.beerapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

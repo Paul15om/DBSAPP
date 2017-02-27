@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.Adapters;
+package pe.com.dbs.beerapp.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import pe.com.dbs.beerapp.Models.Bar;
 import pe.com.dbs.beerapp.R;
+import pe.com.dbs.beerapp.models.Bar;
 
 
 /**
@@ -23,8 +23,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder>{
     public BarAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.card, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(v);
-        return viewHolder;
+        return new ViewHolder(v);
     }
     @Override
     public void onBindViewHolder(BarAdapter.ViewHolder viewHolder, int i) {
@@ -49,13 +48,13 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder>{
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         // Campos respectivos de un item
-        public TextView _Name;
-        public TextView _Address;
-        public TextView _Phone;
+        TextView _Name;
+        TextView _Address;
+        TextView _Phone;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             _Name = (TextView) v.findViewById(R.id._Name);
             _Address = (TextView) v.findViewById(R.id._Address);
