@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,8 +12,10 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,6 +61,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     private UserLoginTask mAuthTask = null;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private Button mSignIn;
     private View mProgressView;
     private View mLoginFormView;
     private CallbackManager mCallBackManager;
@@ -69,6 +73,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
 
         mCallBackManager = CallbackManager.Factory.create();
         LoginButton mLoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
+        mSignIn = (Button) findViewById(R.id.link_to_login);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -78,7 +83,8 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
                     if (!isOnline()) {
                         showLoginError(getString(R.string.error_network));
                         return false;
-                    }attemptLogin();
+                    }
+                    attemptLogin();
                     return true;
                 }
                 return false;
@@ -110,10 +116,12 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
                 request.setParameters(parameters);
                 request.executeAsync();
             }
+
             @Override
             public void onCancel() {
                 Toast.makeText(getApplicationContext(), R.string.com_facebook_loginview_cancel_action, Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onError(FacebookException error) {
                 Toast.makeText(getApplicationContext(), R.string.com_facebook_internet_permission_error_message, Toast.LENGTH_SHORT).show();
@@ -130,10 +138,43 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
                 attemptLogin();
             }
         });
+        mSignIn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
+                builder.setTitle("Titulo")
+                        .setMessage("El Mensaje para el usuario")
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast toast1 =
+                                                Toast.makeText(getApplicationContext(),
+                                                        "OK", Toast.LENGTH_SHORT);
+
+                                        toast1.show();
+                                    }
+                                })
+                        .setNegativeButton("CANCELAR",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Toast toast1 =
+                                                Toast.makeText(getApplicationContext(),
+                                                        "CANCELAR", Toast.LENGTH_SHORT);
+
+                                        toast1.show();
+                                    }
+                                });
+
+                builder.create();
+            }
+        });
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
     }
+
 
     private boolean isOnline() {
         ConnectivityManager cm =

@@ -8,10 +8,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-
     android:fillViewport="true"
     android:background="@drawable/holi"
-    tools:context="pe.com.dbs.beerapp.Activities.LoginActivity">
+    tools:context="pe.com.dbs.beerapp.activities.LoginActivity">
 
     <!-- Login progress -->
     <ProgressBar
@@ -66,9 +65,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_password"
-                    android:imeActionId="@+id/login"
-                    android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
                     style="@style/EditTextStyleBotton"
                     android:inputType="textPassword"
                     android:maxLines="1" />
@@ -102,12 +98,13 @@
                     android:textColor="#025f7c"
                     android:textSize="20sp" />
 
-                <TextView
+                <Button
                     android:id="@+id/link_to_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Registrar1"
                     android:textSize="20sp"
+                    android:clickable="true"
                     android:textColor="#025f7c" />
             </LinearLayout>
         </LinearLayout>
