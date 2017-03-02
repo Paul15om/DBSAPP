@@ -12,7 +12,6 @@
     android:background="@drawable/holi"
     tools:context="pe.com.dbs.beerapp.activities.LoginActivity">
 
-    <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -104,7 +103,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/Registrar1"
                     android:textSize="20sp"
-                    android:clickable="true"
                     android:textColor="#025f7c" />
             </LinearLayout>
         </LinearLayout>
