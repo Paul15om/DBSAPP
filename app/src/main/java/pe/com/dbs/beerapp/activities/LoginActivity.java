@@ -61,11 +61,10 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     private UserLoginTask mAuthTask = null;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private Button mSignIn;
+    private TextView mSignIn;
     private View mProgressView;
     private View mLoginFormView;
     private CallbackManager mCallBackManager;
-    private BarApi mBarApi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +72,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
 
         mCallBackManager = CallbackManager.Factory.create();
         LoginButton mLoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
-        mSignIn = (Button) findViewById(R.id.link_to_login);
+        mSignIn = (TextView) findViewById(R.id.link_to_login);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
