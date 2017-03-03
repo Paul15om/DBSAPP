@@ -23,6 +23,11 @@ public class Customer {
         this.state = state;
     }
 
+    public Customer(String email, String pass) {
+        this.email = email;
+        this.pass = pass;
+    }
+
     public String getAge() {
         return age;
     }

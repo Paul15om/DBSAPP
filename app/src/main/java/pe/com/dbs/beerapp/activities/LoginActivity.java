@@ -15,7 +15,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,9 +45,6 @@ import pe.com.dbs.beerapp.runtime.ApiCliente;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
-
 
 public class LoginActivity extends AppCompatActivity /*implements LoaderCallbacks<Cursor>*/ {
 
@@ -56,15 +52,13 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
             "Jeral@1.com:zaperoko", "bar@1.com:bar12"
     };
 
-    public static final String BASE_URL = "http://devnextdoor.com/api/";
-    private static Retrofit retrofit = null;
-    private UserLoginTask mAuthTask = null;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private TextView mSignIn;
     private View mProgressView;
     private View mLoginFormView;
     private CallbackManager mCallBackManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +72,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                if (id == R.id.login_form || id == EditorInfo.IME_NULL) {
                     if (!isOnline()) {
                         showLoginError(getString(R.string.error_network));
                         return false;
@@ -226,63 +220,41 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
             focusView.requestFocus();
         } else {
             // Retrofit setup
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(JacksonConverterFactory.create())
-                    .build();
+
 
             // Service setup
             BarApi apiService = ApiCliente.getClient().create(BarApi.class);
 
             // Prepare the HTTP request
-            Call<Customer> call = apiService.login(email,password);
+
+            Call<Void> call = apiService.login(new Customer(email, password));
 
             // Asynchronously execute HTTP request
-            call.enqueue(new Callback<Customer>() {
+            call.enqueue(new Callback<Void>() {
+
                 @Override
-                public void onResponse(Call<Customer> call, Response<Customer> response) {
-                    // http response status code + headers
-                    System.out.println("Response status code: " + response.code());
-                    Toast.makeText(LoginActivity.this, "Response status code: " + response.code(), Toast.LENGTH_LONG).show();
-/*
-                    // isSuccess is true if response code => 200 and <= 300
-                    if (!response.isSuccess()) {
-                        // print response body if unsuccessful
-                        try {
-                            System.out.println(response.errorBody().string());
-                        } catch (IOException e) {
-                            // do nothing
-                        }
-                        return;
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.headers().get("D0f8f007")!=null){
+                        Toast.makeText(LoginActivity.this, "Login succeful", Toast.LENGTH_LONG).show();
+                        showAppointmentsScreen();
                     }
-
-                    // if parsing the JSON body failed, `response.body()` returns null
-                    Customer decodedResponse = response.body();
-                    if (decodedResponse == null) return;
-
-                    // at this point the JSON body has been successfully parsed
-                    System.out.println("Response (contains request infos):");
-                    System.out.println("- url:         " + decodedResponse.url);
-                    System.out.println("- ip:          " + decodedResponse.origin);
-                    System.out.println("- headers:     " + decodedResponse.headers);
-                    System.out.println("- args:        " + decodedResponse.args);
-                    System.out.println("- form params: " + decodedResponse.form);
-                    System.out.println("- json params: " + decodedResponse.json);*/
                 }
 
                 @Override
-                public void onFailure(Call<Customer> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     System.out.println("onFailure");
                     System.out.println(t.getMessage());
                 }
-
 
             });
 
         }
     }
 
-    public void onBackPressed() {
+
+    private void showAppointmentsScreen() {
+        startActivity(new Intent(LoginActivity.this, BarActivity.class));
+        finish();
     }
 
     private boolean isEmailValid(String email) {
@@ -321,76 +293,5 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         }
     }
 
-    private void showAppointmentsScreen() {
-        startActivity(new Intent(LoginActivity.this, BarActivity.class));
-        finish();
-    }
-
-    public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
-        }
-
-        @Override
-        protected Integer doInBackground(Void... params) {
-
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return 3;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    return 2;
-                }
-
-                if (pieces[1].equals(mPassword)) {
-                    return 3;
-                }
-
-            }
-            return 1;
-            /*1=Petición exitosa
-              2=email incorrecto
-              3=Password incorrecto
-              4=Error del servidor*/
-        }
-
-        protected void onPostExecute(final Integer success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            switch (success) {
-                case 1:
-                   // showAppointmentsScreen();
-                    break;
-                case 2:
-                    showLoginError(getString(R.string.error_invalid_email));
-                    break;
-                case 3:
-                    showLoginError(getString(R.string.error_invalid_password));
-                    break;
-                case 4:
-                    showLoginError(getString(R.string.error_server));
-                    break;
-            }
-        }
-
-
-
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-
-    }
 }
 
