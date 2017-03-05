@@ -11,21 +11,23 @@ import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.activities.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
-    private ProgressBar _Progress;
+    private ProgressBar mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        _Progress = (ProgressBar) findViewById(R.id.splash_screen_progress_bar);
+        mProgress = (ProgressBar) findViewById(R.id.splash_screen_progress_bar);
 
         new Thread(new Runnable() {
             public void run() {
                 doWork();
-                startApp();
                 finish();
+                startApp();
+
             }
         }).start();
+
     }
 
     private void doWork() {
@@ -34,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
                 Random rnd = new Random();
                 int Num =(int)(rnd.nextDouble() * 600 + 100);
                 Thread.sleep(Num);
-                _Progress.setProgress(progress);
+                mProgress.setProgress(progress);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -43,6 +45,5 @@ public class SplashActivity extends AppCompatActivity {
 
     private void startApp() {
         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-        finish();
     }
 }

@@ -12,10 +12,6 @@ import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.models.Bar;
 
 
-/**
- * Created by JeralBenites on 25/02/2017.
- */
-
 public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder>{
     private List<Bar> items;
 
@@ -27,9 +23,9 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder>{
     }
     @Override
     public void onBindViewHolder(BarAdapter.ViewHolder viewHolder, int i) {
-        viewHolder._Name.setText(items.get(i).get_Name());
-        viewHolder._Address.setText(items.get(i).get_Address());
-        viewHolder._Phone.setText(items.get(i).get_Phone());
+        viewHolder.mName.setText(items.get(i).getmName());
+        viewHolder.mAddress.setText(items.get(i).getmAddress());
+        viewHolder.mPhone.setText(items.get(i).getmPhone());
     }
 
 
@@ -49,16 +45,16 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder>{
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        // Campos respectivos de un item
-        TextView _Name;
-        TextView _Address;
-        TextView _Phone;
+
+        TextView mName;
+        TextView mAddress;
+        TextView mPhone;
 
         ViewHolder(View v) {
             super(v);
-            _Name = (TextView) v.findViewById(R.id._Name);
-            _Address = (TextView) v.findViewById(R.id._Address);
-            _Phone = (TextView) v.findViewById(R.id._Phone);
+            mName = (TextView) v.findViewById(R.id.mName);
+            mAddress = (TextView) v.findViewById(R.id.mAddress);
+            mPhone = (TextView) v.findViewById(R.id.mPhone);
         }
     }
 }

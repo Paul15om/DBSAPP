@@ -5,37 +5,37 @@ package pe.com.dbs.beerapp.models;
  */
 
 public class Bar {
-    private String _Name;
-    private String _Address;
-    private String _Phone;
+    private String mName;
+    private String mAddress;
+    private String mPhone;
 
-    public Bar(String _Name, String _Address, String _Phone) {
-        this._Name = _Name;
-        this._Address = _Address;
-        this._Phone = _Phone;
+    public String getmName() {
+        return mName;
     }
 
-    public String get_Name() {
-        return _Name;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public void set_Name(String _Name) {
-        this._Name = _Name;
+    public String getmAddress() {
+        return mAddress;
     }
 
-    public String get_Address() {
-        return _Address;
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
     }
 
-    public void set_Address(String _Address) {
-        this._Address = _Address;
+    public String getmPhone() {
+        return mPhone;
     }
 
-    public String get_Phone() {
-        return _Phone;
+    public void setmPhone(String mPhone) {
+        this.mPhone = mPhone;
     }
 
-    public void set_Phone(String _Phone) {
-        this._Phone = _Phone;
+    public Bar(String mName, String mAddress, String mPhone) {
+        this.mName = mName;
+        this.mAddress = mAddress;
+        this.mPhone = mPhone;
     }
 }

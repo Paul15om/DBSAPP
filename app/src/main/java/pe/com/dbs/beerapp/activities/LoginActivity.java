@@ -1,24 +1,18 @@
 package pe.com.dbs.beerapp.activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
+import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,58 +31,38 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.Random;
 
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.constants.BarApi;
+import pe.com.dbs.beerapp.dialog.SignUp;
 import pe.com.dbs.beerapp.models.Customer;
 import pe.com.dbs.beerapp.runtime.ApiCliente;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity /*implements LoaderCallbacks<Cursor>*/ {
-
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "Jeral@1.com:zaperoko", "bar@1.com:bar12"
-    };
+public class LoginActivity extends AppCompatActivity {
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private TextView mSignIn;
-    private View mProgressView;
-    private View mLoginFormView;
     private CallbackManager mCallBackManager;
+    private TextView mSignUp;
+    private Boolean mEstado;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         mCallBackManager = CallbackManager.Factory.create();
-        LoginButton mLoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
-        mSignIn = (TextView) findViewById(R.id.link_to_login);
+        mSignUp = (TextView) findViewById(R.id.linkToLogin);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == R.id.login_form || id == EditorInfo.IME_NULL) {
-                    if (!isOnline()) {
-                        showLoginError(getString(R.string.error_network));
-                        return false;
-                    }
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-        mLoginButton.setReadPermissions(Arrays.asList(
-                "public_profile", "email", "user_friends"));
+        LoginButton mLoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
+        mLoginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
         mLoginButton.registerCallback(mCallBackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
@@ -96,7 +70,6 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
                             public void onCompleted(
                                     JSONObject object,
                                     GraphResponse response) {
-
                                 try {
                                     mEmailView.setText(object.getString("email"));
                                 } catch (JSONException e) {
@@ -120,7 +93,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
                 Toast.makeText(getApplicationContext(), R.string.com_facebook_internet_permission_error_message, Toast.LENGTH_SHORT).show();
             }
         });
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = (Button) findViewById(R.id.EmailSignInButton);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,43 +104,16 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
                 attemptLogin();
             }
         });
-        mSignIn.setOnClickListener(new OnClickListener() {
+        mSignUp.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-
-                builder.setTitle("Titulo")
-                        .setMessage("El Mensaje para el usuario")
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Toast toast1 =
-                                                Toast.makeText(getApplicationContext(),
-                                                        "OK", Toast.LENGTH_SHORT);
-
-                                        toast1.show();
-                                    }
-                                })
-                        .setNegativeButton("CANCELAR",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Toast toast1 =
-                                                Toast.makeText(getApplicationContext(),
-                                                        "CANCELAR", Toast.LENGTH_SHORT);
-
-                                        toast1.show();
-                                    }
-                                });
-
-                builder.create();
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getFragmentManager();
+                new SignUp().show(fragmentManager, "Sign Up");
             }
         });
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        mEmailView.setText("george@dbs.com");
+        mPasswordView.setText("1234");
     }
-
 
     private boolean isOnline() {
         ConnectivityManager cm =
@@ -176,18 +122,17 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnected();
     }
+
     private void showLoginError(String error) {
         Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
     }
-    @Override
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallBackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
     }
 
@@ -196,18 +141,17 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
-        String email = mEmailView.getText().toString();
+        final String email = mEmailView.getText().toString();
         final String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        /*if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
-        }*/
-        if (TextUtils.isEmpty(email)) {
+        } else if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
@@ -219,38 +163,20 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         if (cancel) {
             focusView.requestFocus();
         } else {
-            // Retrofit setup
-
-
-            // Service setup
+            BackgroundTask task = new BackgroundTask(LoginActivity.this);
+            task.execute();
             BarApi apiService = ApiCliente.getClient().create(BarApi.class);
-
-            // Prepare the HTTP request
-
             Call<Void> call = apiService.login(new Customer(email, password));
-
-            // Asynchronously execute HTTP request
             call.enqueue(new Callback<Void>() {
-
-                @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.headers().get("D0f8f007")!=null){
-                        Toast.makeText(LoginActivity.this, "Login succeful", Toast.LENGTH_LONG).show();
-                        showAppointmentsScreen();
-                    }
+                    mEstado = response.headers().get("D0f8f007") != null;
                 }
-
-                @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    System.out.println("onFailure");
                     System.out.println(t.getMessage());
                 }
-
             });
-
         }
     }
-
 
     private void showAppointmentsScreen() {
         startActivity(new Intent(LoginActivity.this, BarActivity.class));
@@ -262,36 +188,42 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() >= 4;
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+    private class BackgroundTask extends AsyncTask<Void, Void, Void> {
+        private ProgressDialog dialog;
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
+        BackgroundTask(LoginActivity activity) {
+            dialog = new ProgressDialog(activity);
+        }
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        @Override
+        protected void onPreExecute() {
+            dialog.show();
+            dialog.setContentView(R.layout.custom_progressdialog);
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+                if (mEstado) showAppointmentsScreen();
+                if (!mEstado)
+                    Toast.makeText(LoginActivity.this, getString(R.string.LoginNo), Toast.LENGTH_LONG).show();
+            }
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Random rnd = new Random();
+                int Num = (int) (rnd.nextDouble() * 3500 + 2000);
+                Thread.sleep(Num);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
-
 }
-
