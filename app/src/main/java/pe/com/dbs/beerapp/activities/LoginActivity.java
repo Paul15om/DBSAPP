@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     private CallbackManager mCallBackManager;
-    private TextView mSignUp;
     private Boolean mEstado;
 
     @Override
@@ -59,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mCallBackManager = CallbackManager.Factory.create();
-        mSignUp = (TextView) findViewById(R.id.linkToLogin);
+        TextView mSignUp = (TextView) findViewById(R.id.linkToLogin);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         LoginButton mLoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);

@@ -12,6 +12,7 @@ import android.widget.Button;
 import pe.com.dbs.beerapp.R;
 
 public class SignUp extends DialogFragment {
+
     private static final String TAG = SignUp.class.getSimpleName();
 
     public SignUp() {
@@ -20,10 +21,10 @@ public class SignUp extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        return createLoginDialogo();
+        return createLoginDialog();
     }
 
-    public AlertDialog createLoginDialogo() {
+    private AlertDialog createLoginDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -37,6 +38,7 @@ public class SignUp extends DialogFragment {
 
         signUp.setOnClickListener(
                 new View.OnClickListener() {
+
                     @Override
                     public void onClick(View v) {
 
@@ -47,4 +49,3 @@ public class SignUp extends DialogFragment {
     }
 
 }
-
