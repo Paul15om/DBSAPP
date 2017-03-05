@@ -8,7 +8,6 @@ import android.widget.ProgressBar;
 import java.util.Random;
 
 import pe.com.dbs.beerapp.R;
-import pe.com.dbs.beerapp.activities.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private ProgressBar mProgress;
@@ -31,10 +30,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void doWork() {
-        for (int progress=0; progress<100; progress+=30) {
+        for (int progress = 0; progress < 100; progress += 30) {
             try {
                 Random rnd = new Random();
-                int num =(int)(rnd.nextDouble() * 600 + 100);
+                int num = (int) (rnd.nextDouble() * 600 + 100);
                 Thread.sleep(num);
                 mProgress.setProgress(progress);
             } catch (Exception e) {

@@ -5,18 +5,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /**
  * Created by JeralBenites on 25/02/2017.
  */
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Bar {
 
-    private Integer				barId;
+    private Integer barId;
 
-    private String				address;
+    private String address;
 
-    private String				name;
+    private String name;
 
-    private String				phone;
+    private String phone;
 
-    private Integer				state;
+    private Integer state;
 
     public Integer getBarId() {
         return barId;

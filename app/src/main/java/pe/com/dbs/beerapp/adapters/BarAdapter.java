@@ -21,7 +21,7 @@ import pe.com.dbs.beerapp.models.Bar;
  * Created by JeralBenites on 25/02/2017.
  */
 
-public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder>{
+public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
 
     private List<Bar> bars;
 
@@ -44,7 +44,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder>{
         viewHolder.address.setText(bar.getAddress());
         viewHolder.phone.setText(bar.getPhone());
 
-        viewHolder.barCardView.setOnClickListener(new View.OnClickListener(){
+        viewHolder.barCardView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

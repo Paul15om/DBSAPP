@@ -6,9 +6,10 @@ package pe.com.dbs.beerapp.constants;
 
 public final class Constant {
 
-    private Constant(){}
+    private Constant() {
+    }
 
-    public static final String AUTH_TOKEN ="D0f8f007";
+    public static final String AUTH_TOKEN = "D0f8f007";
 
     public static String authToken;
 

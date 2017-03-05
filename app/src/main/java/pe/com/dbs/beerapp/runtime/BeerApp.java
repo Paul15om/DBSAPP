@@ -10,7 +10,7 @@ import com.facebook.appevents.AppEventsLogger;
  */
 
 public class BeerApp extends Application {
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);

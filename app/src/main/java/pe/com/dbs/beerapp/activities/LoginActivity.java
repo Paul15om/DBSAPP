@@ -1,26 +1,18 @@
 package pe.com.dbs.beerapp.activities;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -188,10 +180,10 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     String authToken = response.headers().get(Constant.AUTH_TOKEN);
-                    if (authToken !=null){
+                    if (authToken != null) {
                         Constant.authToken = authToken;
                     }
-                    mEstado = authToken !=null;
+                    mEstado = authToken != null;
 
                 }
 
@@ -235,9 +227,11 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             if (dialog.isShowing()) {
                 dialog.dismiss();
-                if (mEstado) {showAppointmentsScreen();}
-                if (!mEstado)
+                if (mEstado) {
+                    showAppointmentsScreen();
+                } else {
                     Toast.makeText(LoginActivity.this, getString(R.string.LoginNo), Toast.LENGTH_LONG).show();
+                }
             }
         }
 

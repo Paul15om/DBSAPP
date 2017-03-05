@@ -6,66 +6,66 @@ import java.util.List;
 
 public class Order implements Serializable {
 
-	private static final long		serialVersionUID	= 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Integer					orderId;
+    private Integer orderId;
 
-	private Integer					customerId;
+    private Integer customerId;
 
-	private Date					orderDate;
+    private Date orderDate;
 
-	private String					qrcode;
+    private String qrcode;
 
-	private Integer					state;
+    private Integer state;
 
-	private List<OrderDetail>	orderDetails;
+    private List<OrderDetail> orderDetails;
 
-	public Integer getOrderId() {
-		return orderId;
-	}
+    public Integer getOrderId() {
+        return orderId;
+    }
 
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
 
-	public Integer getCustomerId() {
-		return customerId;
-	}
+    public Integer getCustomerId() {
+        return customerId;
+    }
 
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
 
-	public Date getOrderDate() {
-		return orderDate;
-	}
+    public Date getOrderDate() {
+        return orderDate;
+    }
 
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
 
-	public String getQrcode() {
-		return qrcode;
-	}
+    public String getQrcode() {
+        return qrcode;
+    }
 
-	public void setQrcode(String qrcode) {
-		this.qrcode = qrcode;
-	}
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
+    }
 
-	public Integer getState() {
-		return state;
-	}
+    public Integer getState() {
+        return state;
+    }
 
-	public void setState(Integer state) {
-		this.state = state;
-	}
+    public void setState(Integer state) {
+        this.state = state;
+    }
 
-	public List<OrderDetail> getOrderDetails() {
-		return orderDetails;
-	}
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
 
-	public void setOrderDetails(List<OrderDetail> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
 
 }

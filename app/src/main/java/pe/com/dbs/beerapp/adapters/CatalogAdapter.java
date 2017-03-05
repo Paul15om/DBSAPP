@@ -16,11 +16,11 @@ import pe.com.dbs.beerapp.models.Catalog;
  * Created by jalvarea on 05/03/2017.
  */
 
-public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder>{
+public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
 
     private List<Catalog> catalogs;
 
-    public CatalogAdapter(List<Catalog> catalogs){
+    public CatalogAdapter(List<Catalog> catalogs) {
         this.catalogs = catalogs;
     }
 

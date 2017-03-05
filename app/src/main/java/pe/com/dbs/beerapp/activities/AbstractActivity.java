@@ -25,7 +25,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
 
     protected Retrofit retrofit;
 
-    public AbstractActivity(){
+    public AbstractActivity() {
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
         okHttpClientBuilder.addInterceptor(new Interceptor() {
             @Override
@@ -34,7 +34,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
 
                 Request request = requestOriginal.newBuilder()
                         .header(Constant.AUTH_TOKEN, Constant.authToken)
-                        .method(requestOriginal.method(),requestOriginal.body())
+                        .method(requestOriginal.method(), requestOriginal.body())
                         .build();
 
                 return chain.proceed(request);
@@ -55,7 +55,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
                 .build();
     }
 
-    public <T> void execute(Call<T> call){
+    public <T> void execute(Call<T> call) {
 
         call.enqueue(new Callback<T>() {
 
