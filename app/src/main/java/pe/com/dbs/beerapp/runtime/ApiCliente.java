@@ -12,7 +12,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class ApiCliente {
 
-    public static final String BASE_URL = "https://dbsapp.herokuapp.com/";
+    private static final String BASE_URL = "https://dbsapp.herokuapp.com/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {

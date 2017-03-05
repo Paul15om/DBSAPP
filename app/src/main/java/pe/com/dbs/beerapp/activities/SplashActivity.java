@@ -32,8 +32,7 @@ public class SplashActivity extends AppCompatActivity {
         for (int progress=0; progress<100; progress+=30) {
             try {
                 Random rnd = new Random();
-                int Num =(int)(rnd.nextDouble() * 600 + 100);
-                Thread.sleep(Num);
+                Thread.sleep((int)(rnd.nextDouble() * 600 + 100));
                 _Progress.setProgress(progress);
             } catch (Exception e) {
                 e.printStackTrace();

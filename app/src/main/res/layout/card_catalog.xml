@@ -4,7 +4,9 @@
     android:layout_height="100dp"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="4dp"
-    card_view:cardUseCompatPadding="true">
+    card_view:cardUseCompatPadding="true"
+    android:id="@+id/catalogCardView">
+
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -16,7 +18,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/_Name"
+            android:id="@+id/productName"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10dp" />
 
@@ -25,18 +27,9 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Small Text"
-            android:id="@+id/_Address"
-            android:layout_below="@+id/_Name"
-            android:layout_alignLeft="@+id/_Name" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Small Text"
-            android:id="@+id/_Phone"
-            android:layout_below="@+id/_Address"
-            android:layout_alignLeft="@+id/_Address" />
+            android:id="@+id/productPrice"
+            android:layout_below="@+id/productName"
+            android:layout_alignLeft="@+id/productName" />
 
     </RelativeLayout>
 </android.support.v7.widget.CardView>

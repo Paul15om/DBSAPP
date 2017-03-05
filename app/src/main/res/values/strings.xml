@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"> BDS</string>
+    <string name="app_name">Dbs</string>
     <string name="facebook_app_id">1916374748585803</string>
     <string name="internteOK">Conexión Exitosa a Internet</string>
     <string name="InternteNO">Fallo Conexión a Internet</string>

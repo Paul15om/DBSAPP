@@ -1,41 +1,61 @@
 package pe.com.dbs.beerapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * Created by JeralBenites on 25/02/2017.
  */
-
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Bar {
-    private String _Name;
-    private String _Address;
-    private String _Phone;
 
-    public Bar(String _Name, String _Address, String _Phone) {
-        this._Name = _Name;
-        this._Address = _Address;
-        this._Phone = _Phone;
+    private Integer				barId;
+
+    private String				address;
+
+    private String				name;
+
+    private String				phone;
+
+    private Integer				state;
+
+    public Integer getBarId() {
+        return barId;
     }
 
-    public String get_Name() {
-        return _Name;
+    public void setBarId(Integer barId) {
+        this.barId = barId;
     }
 
-    public void set_Name(String _Name) {
-        this._Name = _Name;
+    public String getAddress() {
+        return address;
     }
 
-    public String get_Address() {
-        return _Address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void set_Address(String _Address) {
-        this._Address = _Address;
+    public String getName() {
+        return name;
     }
 
-    public String get_Phone() {
-        return _Phone;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void set_Phone(String _Phone) {
-        this._Phone = _Phone;
+    public String getPhone() {
+        return phone;
     }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
 }

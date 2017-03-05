@@ -1,5 +1,8 @@
 package pe.com.dbs.beerapp.adapters;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
+import pe.com.dbs.beerapp.activities.CatalogActivity;
+import pe.com.dbs.beerapp.constants.Constant;
 import pe.com.dbs.beerapp.models.Bar;
 
 
@@ -17,48 +22,62 @@ import pe.com.dbs.beerapp.models.Bar;
  */
 
 public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder>{
-    private List<Bar> items;
+
+    private List<Bar> bars;
+
+    public BarAdapter(List<Bar> bars) {
+        this.bars = bars;
+    }
 
     @Override
-    public BarAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public BarAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.card, viewGroup, false);
+                .inflate(R.layout.card_bar, viewGroup, false);
+
         return new ViewHolder(v);
     }
+
     @Override
-    public void onBindViewHolder(BarAdapter.ViewHolder viewHolder, int i) {
-        viewHolder._Name.setText(items.get(i).get_Name());
-        viewHolder._Address.setText(items.get(i).get_Address());
-        viewHolder._Phone.setText(items.get(i).get_Phone());
-    }
+    public void onBindViewHolder(BarAdapter.ViewHolder viewHolder, int index) {
+        final Bar bar = bars.get(index);
+        viewHolder.name.setText(bar.getName());
+        viewHolder.address.setText(bar.getAddress());
+        viewHolder.phone.setText(bar.getPhone());
 
+        viewHolder.barCardView.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constant.BAR_ID, bar.getBarId());
+                Intent intent = new Intent(v.getContext(), CatalogActivity.class);
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
+            }
 
-    public BarAdapter(List<Bar> items) {
-        this.items = items;
+        });
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return bars.size();
     }
 
-    public List<Bar> getProducts() {
-        return items;
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private TextView name;
+        private TextView address;
+        private TextView phone;
+        private CardView barCardView;
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        // Campos respectivos de un item
-        TextView _Name;
-        TextView _Address;
-        TextView _Phone;
-
-        ViewHolder(View v) {
+        public ViewHolder(View v) {
             super(v);
-            _Name = (TextView) v.findViewById(R.id._Name);
-            _Address = (TextView) v.findViewById(R.id._Address);
-            _Phone = (TextView) v.findViewById(R.id._Phone);
+            name = (TextView) v.findViewById(R.id.barName);
+            address = (TextView) v.findViewById(R.id.barAddress);
+            phone = (TextView) v.findViewById(R.id.barPhone);
+            barCardView = (CardView) v.findViewById(R.id.barCardView);
         }
+
     }
+
 }

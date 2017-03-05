@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -39,22 +38,18 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 import pe.com.dbs.beerapp.R;
-import pe.com.dbs.beerapp.constants.BarApi;
+import pe.com.dbs.beerapp.constants.Constant;
 import pe.com.dbs.beerapp.models.Customer;
 import pe.com.dbs.beerapp.runtime.ApiCliente;
+import pe.com.dbs.beerapp.service.LoginService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity /*implements LoaderCallbacks<Cursor>*/ {
-
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "Jeral@1.com:zaperoko", "bar@1.com:bar12"
-    };
+public class LoginActivity extends AppCompatActivity {
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private TextView mSignIn;
     private View mProgressView;
     private View mLoginFormView;
     private CallbackManager mCallBackManager;
@@ -66,7 +61,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
 
         mCallBackManager = CallbackManager.Factory.create();
         LoginButton mLoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
-        mSignIn = (TextView) findViewById(R.id.link_to_login);
+        TextView mSignIn = (TextView) findViewById(R.id.link_to_login);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -176,9 +171,11 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnected();
     }
+
     private void showLoginError(String error) {
         Toast.makeText(LoginActivity.this, error, Toast.LENGTH_LONG).show();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -223,18 +220,20 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
 
 
             // Service setup
-            BarApi apiService = ApiCliente.getClient().create(BarApi.class);
+            LoginService loginService = ApiCliente.getClient().create(LoginService.class);
 
             // Prepare the HTTP request
 
-            Call<Void> call = apiService.login(new Customer(email, password));
+            Call<Void> call = loginService.login(new Customer(email, password));
 
             // Asynchronously execute HTTP request
             call.enqueue(new Callback<Void>() {
 
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.headers().get("D0f8f007")!=null){
+                    String authToken = response.headers().get(Constant.AUTH_TOKEN);
+                    if (authToken != null) {
+                        Constant.authToken = authToken;
                         Toast.makeText(LoginActivity.this, "Login succeful", Toast.LENGTH_LONG).show();
                         showAppointmentsScreen();
                     }
@@ -242,7 +241,7 @@ public class LoginActivity extends AppCompatActivity /*implements LoaderCallback
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    System.out.println("onFailure");
+                    Toast.makeText(LoginActivity.this, "Login error", Toast.LENGTH_LONG).show();
                     System.out.println(t.getMessage());
                 }
 
