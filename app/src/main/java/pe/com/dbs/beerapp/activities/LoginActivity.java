@@ -210,9 +210,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private class BackgroundTask extends AsyncTask<Void, Void, Void> {
+
         private ProgressDialog dialog;
 
         BackgroundTask(LoginActivity activity) {
+
             dialog = new ProgressDialog(activity);
         }
 

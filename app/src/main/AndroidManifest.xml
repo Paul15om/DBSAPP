@@ -23,7 +23,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -33,8 +32,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.BarActivity"
-            android:label="@string/title_activity_bar" />
-
-        <activity android:name=".activities.CatalogActivity"></activity>
+            android:label="@string/title_activity_bar"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity android:name=".activities.CatalogActivity" />
     </application>
 </manifest>
