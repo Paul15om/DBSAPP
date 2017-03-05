@@ -19,7 +19,7 @@
             android:text="Large Text"
             android:id="@+id/barName"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginStart="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
