@@ -1,9 +1,17 @@
 package pe.com.dbs.beerapp.activities;
 
+import android.Manifest;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -12,7 +20,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.adapters.BarAdapter;
@@ -22,7 +32,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class BarActivity extends AbstractActivity {
+    String mensaje1;
+    String mensaje2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +63,18 @@ public class BarActivity extends AbstractActivity {
                 Toast.makeText(BarActivity.this, "Login error", Toast.LENGTH_LONG).show();
             }
         });
+        LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Localizacion Local = new Localizacion();
+        Local.setMainActivity(this);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
+                Local);
+
+        showSnackBar("Localizacion agregada");
+        showSnackBar("");
+
     }
 
     private void setToolbar() {
@@ -79,6 +104,7 @@ public class BarActivity extends AbstractActivity {
                 return true;
             }
         };
+        assert searchView != null;
         searchView.setOnQueryTextListener(queryTextListener);
         return super.onCreateOptionsMenu(menu);
     }
@@ -88,12 +114,66 @@ public class BarActivity extends AbstractActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void showSnackBar(String msg) {
+    public void showSnackBar(String msg) {
         Snackbar
                 .make(findViewById(R.id.coordinator), msg, Snackbar.LENGTH_LONG)
                 .show();
     }
 
+    public void setLocation(Location loc) {
+        if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
+            try {
+                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                List<Address> list = geocoder.getFromLocation(
+                        loc.getLatitude(), loc.getLongitude(), 1);
+                if (!list.isEmpty()) {
+                    Address DirCalle = list.get(0);
+                    showSnackBar("Mi direccion es: \n"
+                            + DirCalle.getAddressLine(0));
+                }
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class Localizacion implements LocationListener {
+        BarActivity mainActivity;
+
+        public BarActivity getMainActivity() {
+            return mainActivity;
+        }
+
+        void setMainActivity(BarActivity mainActivity) {
+            this.mainActivity = mainActivity;
+        }
+
+        @Override
+        public void onLocationChanged(Location loc) {
+            loc.getLatitude();
+            loc.getLongitude();
+            String Text = "Mi ubicacion actual es: " + "\n Lat = "
+                    + loc.getLatitude() + "\n Long = " + loc.getLongitude();
+            showSnackBar(Text);
+            this.mainActivity.setLocation(loc);
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+            showSnackBar("GPS Desactivado");
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+            showSnackBar("GPS Activado");
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
+
+    }
 
 }
+

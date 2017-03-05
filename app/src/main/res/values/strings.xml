@@ -3,7 +3,7 @@
     <string name="facebook_app_id">1916374748585803</string>
     <string name="internteOK">Conexión Exitosa a Internet</string>
     <string name="InternteNO">Fallo Conexión a Internet</string>
-    <string name="title_activity_bar">...</string>
+    <string name="title_activity_bar">…</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- login -->
@@ -24,4 +24,5 @@
 
     <string name="loading">Cargando</string>
     <string name="Search">Buscando</string>
+
 </resources>
