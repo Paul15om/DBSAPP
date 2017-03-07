@@ -79,7 +79,7 @@ public class BarActivity extends AbstractActivity {
 
     private void setToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar); 
     }
 
     @Override
