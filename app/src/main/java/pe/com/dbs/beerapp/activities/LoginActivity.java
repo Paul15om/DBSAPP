@@ -36,8 +36,8 @@ import java.util.Random;
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.constants.Constant;
 import pe.com.dbs.beerapp.dialog.SignUp;
+import pe.com.dbs.beerapp.factory.RetrofitFactory;
 import pe.com.dbs.beerapp.models.Customer;
-import pe.com.dbs.beerapp.runtime.ApiCliente;
 import pe.com.dbs.beerapp.service.LoginService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,11 +59,12 @@ public class LoginActivity extends AppCompatActivity {
 
         mCallBackManager = CallbackManager.Factory.create();
         TextView mSignUp = (TextView) findViewById(R.id.linkToLogin);
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mEmailView = (AutoCompleteTextView) findViewById(R.id.emailLogin);
+        mPasswordView = (EditText) findViewById(R.id.passwordLogin);
         LoginButton mLoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
         mLoginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
         mLoginButton.registerCallback(mCallBackManager, new FacebookCallback<LoginResult>() {
+
             @Override
             public void onSuccess(LoginResult loginResult) {
 
@@ -98,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.com_facebook_internet_permission_error_message, Toast.LENGTH_SHORT).show();
             }
         });
-        Button mEmailSignInButton = (Button) findViewById(R.id.EmailSignInButton);
+        Button mEmailSignInButton = (Button) findViewById(R.id.loginButton);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             BackgroundTask task = new BackgroundTask(LoginActivity.this);
             task.execute();
-            LoginService loginService = ApiCliente.getClient().create(LoginService.class);
+            LoginService loginService = RetrofitFactory.getRetrofitLogin().create(LoginService.class);
             Call<Void> call = loginService.login(new Customer(email, password));
             call.enqueue(new Callback<Void>() {
 

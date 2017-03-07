@@ -15,17 +15,20 @@ public class Customer {
     private String email;
     private Integer state;
 
+    public Customer() {
+    }
+
+    public Customer(String email, String pass) {
+        this.email = email;
+        this.pass = pass;
+    }
+
     public Customer(String age, Integer customerId, String email, String pass, Integer state) {
         this.age = age;
         this.customerId = customerId;
         this.email = email;
         this.pass = pass;
         this.state = state;
-    }
-
-    public Customer(String email, String pass) {
-        this.email = email;
-        this.pass = pass;
     }
 
     public String getAge() {

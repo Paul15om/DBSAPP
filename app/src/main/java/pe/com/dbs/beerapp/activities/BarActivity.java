@@ -109,18 +109,13 @@ public class BarActivity extends AbstractActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void showSnackBar(String msg) {
+    private void showSnackBar(String msg) {
         Snackbar
                 .make(findViewById(R.id.coordinator), msg, Snackbar.LENGTH_LONG)
                 .show();
     }
 
-    public void setLocation(Location loc) {
+    private void setLocation(Location loc) {
         if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
             try {
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());

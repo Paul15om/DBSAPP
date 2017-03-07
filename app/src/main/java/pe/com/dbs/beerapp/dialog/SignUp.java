@@ -8,8 +8,10 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import pe.com.dbs.beerapp.R;
+import pe.com.dbs.beerapp.models.Customer;
 
 public class SignUp extends DialogFragment {
 
@@ -34,13 +36,19 @@ public class SignUp extends DialogFragment {
 
         builder.setView(v);
 
-        Button signUp = (Button) v.findViewById(R.id.SignUpbuytton);
+        Button signUp = (Button) v.findViewById(R.id.signUpButton);
+        final EditText emailSingUp = (EditText) v.findViewById(R.id.emailSingUp);
+        final EditText passwordSingUp = (EditText) v.findViewById(R.id.passwordSingUp);
+        final EditText dateBornSingUp = (EditText) v.findViewById(R.id.dateBornSingUp);
 
         signUp.setOnClickListener(
                 new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
+                        Customer customer = new Customer();
+                        customer.setEmail(emailSingUp.getText().toString());
+                        customer.setPass(passwordSingUp.getText().toString());
 
                     }
                 }

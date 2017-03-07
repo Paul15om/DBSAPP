@@ -10,13 +10,13 @@
         android:padding="16dp">
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/email_address"
+            android:id="@+id/emailLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/your_email_address"
+                android:id="@+id/emailSingUp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -25,13 +25,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/Auto_password"
+            android:id="@+id/passwordLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/passwordSingUp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -40,13 +40,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/dateBorn"
+            android:id="@+id/dateBornLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
             <EditText
-                android:id="@+id/dateBorn_Text"
+                android:id="@+id/dateBornSingUp"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -55,7 +55,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/SignUpbuytton"
+            android:id="@+id/signUpButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -63,4 +63,5 @@
             android:text="@string/Registrar1"
             android:textColor="#fff" />
     </LinearLayout>
+
 </ScrollView>

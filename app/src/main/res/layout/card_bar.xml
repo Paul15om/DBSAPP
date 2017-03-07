@@ -54,7 +54,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/Latitude"
+            android:id="@+id/barLatitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/barPhone"
@@ -64,10 +64,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/longitude"
+            android:id="@+id/barLongitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/Latitude"
+            android:layout_alignEnd="@+id/barLatitude"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/barPhone"
             android:layout_marginTop="14dp"

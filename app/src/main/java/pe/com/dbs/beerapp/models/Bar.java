@@ -2,12 +2,18 @@ package pe.com.dbs.beerapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.math.BigDecimal;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Bar {
 
     private Integer barId;
 
     private String address;
+
+    private BigDecimal latitude;
+
+    private BigDecimal longitude;
 
     private String name;
 
@@ -29,6 +35,22 @@ public class Bar {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public BigDecimal getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(BigDecimal latitude) {
+        this.latitude = latitude;
+    }
+
+    public BigDecimal getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(BigDecimal longitude) {
+        this.longitude = longitude;
     }
 
     public String getName() {

@@ -1,4 +1,3 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,21 +11,24 @@
     android:fillViewport="true"
     android:background="@drawable/holi"
     tools:context="pe.com.dbs.beerapp.activities.LoginActivity">
+
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
-            android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/header"
                 android:layout_width="fill_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="35dp"
                 android:paddingBottom="20dp">
+
                 <pl.droidsonroids.gif.GifImageView
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
@@ -37,7 +39,7 @@
             </LinearLayout>
 
             <AutoCompleteTextView
-                android:id="@+id/email"
+                android:id="@+id/emailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_email"
@@ -46,32 +48,36 @@
                 style="@style/EditTextStyleTop" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/passwordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
                 style="@style/EditTextStyleBotton"
                 android:inputType="textPassword"
                 android:maxLines="1" />
+
             <Button
-                android:id="@+id/EmailSignInButton"
+                android:id="@+id/loginButton"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
+
             <com.facebook.login.widget.LoginButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:id="@+id/loginButtonFacebook" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_marginTop="30dp">
+
                 <TextView
                     android:id="@+id/TextToLogin"
                     android:layout_width="wrap_content"
@@ -79,6 +85,7 @@
                     android:text="@string/Registrar"
                     android:textColor="#025f7c"
                     android:textSize="20sp" />
+
                 <TextView
                     android:clickable="true"
                     android:id="@+id/linkToLogin"
@@ -87,7 +94,9 @@
                     android:text="@string/Registrar1"
                     android:textSize="20sp"
                     android:textColor="#025f7c" />
+
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
