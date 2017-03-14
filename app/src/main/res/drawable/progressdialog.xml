@@ -3,7 +3,6 @@
 
     <solid android:color="@color/com_facebook_button_background_color_pressed" />
 
-    <corners android:radius="10dp" />
 
     <padding
         android:left="15dp"

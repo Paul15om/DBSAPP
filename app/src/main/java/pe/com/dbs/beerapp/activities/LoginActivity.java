@@ -31,7 +31,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.constants.Constant;
@@ -50,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     private CallbackManager mCallBackManager;
-    private Boolean mEstado;
+    private Boolean mEstado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -220,6 +219,16 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(6000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
         protected void onPreExecute() {
             dialog.show();
             dialog.setContentView(R.layout.custom_progressdialog);
@@ -237,16 +246,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                Random rnd = new Random();
-                int Num = (int) (rnd.nextDouble() * 3500 + 2000);
-                Thread.sleep(Num);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
+
     }
 }

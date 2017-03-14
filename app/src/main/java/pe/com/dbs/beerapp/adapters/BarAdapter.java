@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
@@ -45,8 +43,8 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         viewHolder.name.setText(bar.getName());
         viewHolder.address.setText(bar.getAddress());
         viewHolder.phone.setText(bar.getPhone());
-        viewHolder.longitude.setText(bar.getLongitude().toString());
-        viewHolder.latitude.setText(bar.getLatitude().toString());
+        //viewHolder.longitude.setText(bar.getLongitude().toString());
+        //viewHolder.latitude.setText(bar.getLatitude().toString());
 
         viewHolder.barCardView.setOnClickListener(new View.OnClickListener() {
 
@@ -73,16 +71,16 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         private TextView address;
         private TextView phone;
         private CardView barCardView;
-        private TextView latitude;
-        private TextView longitude;
+        //private TextView latitude;
+        // private TextView longitude;
 
         public ViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.barName);
             address = (TextView) v.findViewById(R.id.barAddress);
             phone = (TextView) v.findViewById(R.id.barPhone);
-            latitude = (TextView) v.findViewById(R.id.barLatitude);
-            longitude = (TextView) v.findViewById(R.id.barLongitude);
+            // latitude = (TextView) v.findViewById(R.id.barLatitude);
+            //longitude = (TextView) v.findViewById(R.id.barLongitude);
             barCardView = (CardView) v.findViewById(R.id.barCardView);
         }
 

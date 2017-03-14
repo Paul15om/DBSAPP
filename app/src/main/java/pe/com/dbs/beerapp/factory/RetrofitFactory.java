@@ -10,9 +10,6 @@ import pe.com.dbs.beerapp.constants.Constant;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-/**
- * Created by jalvarea on 05/03/2017.
- */
 
 public class RetrofitFactory {
 

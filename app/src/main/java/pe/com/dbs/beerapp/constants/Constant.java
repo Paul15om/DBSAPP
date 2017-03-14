@@ -1,8 +1,5 @@
 package pe.com.dbs.beerapp.constants;
 
-/**
- * Created by jalvarea on 04/03/2017.
- */
 
 public final class Constant {
 

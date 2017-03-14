@@ -2,9 +2,6 @@ package pe.com.dbs.beerapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/**
- * Created by JeralBenites on 26/02/2017.
- */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Customer {
