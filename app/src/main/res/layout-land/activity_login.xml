@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -18,51 +18,56 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/header"
-                android:layout_width="173dp"
+                android:layout_width="fill_parent"
                 android:layout_height="150dp"
                 android:layout_marginTop="35dp"
                 android:paddingBottom="20dp">
 
                 <pl.droidsonroids.gif.GifImageView
-                    android:layout_width="139dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="120dp"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/logo"
                     android:layout_marginBottom="20dp"
                     android:id="@+id/GifBeer" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <AutoCompleteTextView
+                        android:layout_marginTop="30dp"
+                        android:id="@+id/emailLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/prompt_email"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        style="@style/EditTextStyleTop" />
+
+                    <EditText
+                        android:id="@+id/passwordLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/emailLogin"
+                        android:hint="@string/prompt_password"
+                        style="@style/EditTextStyleBotton"
+                        android:inputType="textPassword"
+                        android:maxLines="1" />
+                </RelativeLayout>
+
             </LinearLayout>
 
-            <AutoCompleteTextView
-                android:id="@+id/email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_email"
-                android:layout_marginStart="150dp"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:layout_marginTop="-120dp"
-                style="@style/EditTextStyleTop" />
 
-            <EditText
-                android:id="@+id/passwordSingUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/prompt_password"
-                android:layout_marginStart="150dp"
-                style="@style/EditTextStyleBotton"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:layout_marginBottom="20dp" />
 
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/loginButton"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,7 +89,7 @@
                 android:layout_marginTop="30dp">
 
                 <TextView
-                    android:id="@+id/link_to_login1"
+                    android:id="@+id/TextToLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Registrar"
@@ -93,13 +98,15 @@
 
                 <TextView
                     android:clickable="true"
-                    android:id="@+id/link_to_login"
+                    android:id="@+id/linkToLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/Registrar1"
                     android:textSize="20sp"
                     android:textColor="#025f7c" />
+
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
