@@ -46,8 +46,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
-    private View mLoginFormView;
     private CallbackManager mCallBackManager;
     private Boolean mEstado = false;
 
