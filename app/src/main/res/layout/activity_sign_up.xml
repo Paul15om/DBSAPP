@@ -52,6 +52,7 @@
                 android:ems="10"
                 android:hint="@string/DateBorn"
                 android:inputType="datetime" />
+
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -59,7 +60,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="#b45705"
+            android:background="@color/com_facebook_button_background_color"
             android:text="@string/Registrar1"
             android:textColor="#fff" />
     </LinearLayout>

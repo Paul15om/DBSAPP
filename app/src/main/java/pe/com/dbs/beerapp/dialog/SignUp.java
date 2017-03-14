@@ -3,11 +3,13 @@ package pe.com.dbs.beerapp.dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import pe.com.dbs.beerapp.R;
@@ -23,11 +25,11 @@ public class SignUp extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
         return createLoginDialog();
     }
 
     private AlertDialog createLoginDialog() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -50,10 +52,12 @@ public class SignUp extends DialogFragment {
                         customer.setEmail(emailSingUp.getText().toString());
                         customer.setPass(passwordSingUp.getText().toString());
 
+
                     }
                 }
         );
         return builder.create();
     }
+
 
 }
