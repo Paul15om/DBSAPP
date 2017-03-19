@@ -59,7 +59,7 @@ public class BarActivity extends AbstractActivity {
 
             @Override
             public void onFailure(Call<List<Bar>> call, Throwable t) {
-                Toast.makeText(BarActivity.this, "Login error", Toast.LENGTH_LONG).show();
+                Toast.makeText(BarActivity.this, "Bar error", Toast.LENGTH_LONG).show();
             }
         });
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -170,4 +170,3 @@ public class BarActivity extends AbstractActivity {
     }
 
 }
-

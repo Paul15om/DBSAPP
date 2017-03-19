@@ -2,13 +2,12 @@ package pe.com.dbs.beerapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Customer {
 
     private Integer customerId;
     private String pass;
-    private String age;
+    private String birthDate;
     private String email;
     private Integer state;
 
@@ -16,32 +15,17 @@ public class Customer {
     }
 
     public Customer(String email, String pass) {
-        this.email = email;
-        this.pass = pass;
+        this.setEmail(email);
+        this.setPass(pass);
     }
 
-    public Customer(String age, Integer customerId, String email, String pass, Integer state) {
-        this.age = age;
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
-        this.email = email;
-        this.pass = pass;
-        this.state = state;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
     }
 
     public String getPass() {
@@ -52,6 +36,14 @@ public class Customer {
         this.pass = pass;
     }
 
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -60,11 +52,12 @@ public class Customer {
         this.email = email;
     }
 
-    public Integer getCustomerId() {
-        return customerId;
+    public Integer getState() {
+        return state;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setState(Integer state) {
+        this.state = state;
     }
+
 }
