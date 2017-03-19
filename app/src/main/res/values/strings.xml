@@ -9,7 +9,7 @@
     <!-- login -->
     <string name="prompt_email">Correo</string>
     <string name="prompt_password">Contraseña</string>
-    <string name="DateBorn">Fecha de Nacimineto</string>
+    <string name="dateBorn">Fecha de Nacimiento</string>
     <string name="action_sign_in">Ingresar</string>
     <string name="error_invalid_email">Correo Incorrecto</string>
     <string name="error_invalid_password">Contraseña Error</string>
@@ -17,13 +17,13 @@
     <string name="error_field_required">Campo Requerido</string>
     <string name="error_server">Error en el servidor</string>
     <string name="error_network">Conexión de red no disponible</string>
-    <string name="permission_rationale">Contactods Requerido</string>
+    <string name="permission_rationale">Contactos Requerido</string>
     <string name="Registrar">Aún no te registras? ,</string>
-    <string name="Registrar1">Regístrate </string>
+    <string name="Registrar1">Regístrate</string>
     <string name="LoginNo">Email o Contraseña Incorrecta</string>
 
     <string name="loading">Cargando</string>
     <string name="Search">Buscando</string>
-    <string name="title_activity_catalog">CatalogActivity</string>
+    <string name="title_activity_catalog">Catálogo de productos</string>
 
 </resources>
