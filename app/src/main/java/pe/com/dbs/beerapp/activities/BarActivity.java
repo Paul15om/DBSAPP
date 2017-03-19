@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,6 +35,9 @@ import retrofit2.Response;
 
 public class BarActivity extends AbstractActivity {
 
+    private List<Bar> bars;
+    private RecyclerView.Adapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +49,17 @@ public class BarActivity extends AbstractActivity {
 
             @Override
             public void onResponse(Call<List<Bar>> call, Response<List<Bar>> response) {
+                bars = response.body();
+
                 RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
                 recycler.setHasFixedSize(true);
 
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
                 recycler.setLayoutManager(layoutManager);
 
-                RecyclerView.Adapter adapter = new BarAdapter(response.body());
+                adapter = new BarAdapter(bars);
                 recycler.setAdapter(adapter);
+
             }
 
             @Override
@@ -91,15 +98,32 @@ public class BarActivity extends AbstractActivity {
             searchView.setIconifiedByDefault(false);
         }
         SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+
+            @Override
             public boolean onQueryTextChange(String newText) {
-                showSnackBar(newText + " Text Change");
+                filterBarsAndChangeDataset(newText);
                 return true;
             }
 
+            @Override
             public boolean onQueryTextSubmit(String query) {
-                showSnackBar(query + " Clic Envio");
+                filterBarsAndChangeDataset(query);
                 return true;
             }
+
+            private void filterBarsAndChangeDataset(String text){
+                List<Bar> barsFiltered = new ArrayList<>();
+                for (Bar bar: bars) {
+                    if (bar.getName().toLowerCase().contains(text.toLowerCase())){
+                        barsFiltered.add(bar);
+                    }
+                }
+
+                ((BarAdapter)adapter).setBars(barsFiltered);
+                adapter.notifyDataSetChanged();
+
+            }
+
         };
         assert searchView != null;
         searchView.setOnQueryTextListener(queryTextListener);
@@ -112,16 +136,15 @@ public class BarActivity extends AbstractActivity {
                 .show();
     }
 
-    private void setLocation(Location loc) {
-        if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
+    private void setLocation(Location location) {
+        if (location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
             try {
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-                List<Address> list = geocoder.getFromLocation(
-                        loc.getLatitude(), loc.getLongitude(), 1);
-                if (!list.isEmpty()) {
-                    Address DirCalle = list.get(0);
-                    showSnackBar("Mi direccion es: \n"
-                            + DirCalle.getAddressLine(0));
+                List<Address> addresses = geocoder.getFromLocation(
+                        location.getLatitude(), location.getLongitude(), 1);
+                if (!addresses.isEmpty()) {
+                    Address address = addresses.get(0);
+                    showSnackBar("Mi direccion es: \n" + address.getAddressLine(0));
                 }
 
             } catch (IOException e) {
@@ -142,13 +165,13 @@ public class BarActivity extends AbstractActivity {
         }
 
         @Override
-        public void onLocationChanged(Location loc) {
-            loc.getLatitude();
-            loc.getLongitude();
-            String Text = "Mi ubicacion actual es: " + "\n Lat = "
-                    + loc.getLatitude() + "\n Long = " + loc.getLongitude();
-            showSnackBar(Text);
-            this.mainActivity.setLocation(loc);
+        public void onLocationChanged(Location location) {
+            location.getLatitude();
+            location.getLongitude();
+            String text = "Mi ubicacion actual es: " + "\n Lat = "
+                    + location.getLatitude() + "\n Long = " + location.getLongitude();
+            showSnackBar(text);
+            this.mainActivity.setLocation(location);
         }
 
         @Override

@@ -24,6 +24,14 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
     private List<Bar> bars;
 
     public BarAdapter(List<Bar> bars) {
+        this.setBars(bars);
+    }
+
+    public List<Bar> getBars() {
+        return bars;
+    }
+
+    public void setBars(List<Bar> bars) {
         this.bars = bars;
     }
 
@@ -37,7 +45,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(BarAdapter.ViewHolder viewHolder, int index) {
-        final Bar bar = bars.get(index);
+        final Bar bar = getBars().get(index);
         viewHolder.name.setText(bar.getName());
         viewHolder.address.setText(bar.getAddress());
         viewHolder.phone.setText(bar.getPhone());
@@ -60,8 +68,9 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return bars.size();
+        return getBars().size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
