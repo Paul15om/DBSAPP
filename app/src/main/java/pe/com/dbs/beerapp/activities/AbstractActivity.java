@@ -11,10 +11,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
-
 public abstract class AbstractActivity extends AppCompatActivity {
 
-    protected Retrofit retrofit;
+    protected final Retrofit retrofit;
 
     public AbstractActivity() {
         retrofit = RetrofitFactory.getRetrofit();

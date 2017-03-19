@@ -14,7 +14,7 @@ public class Order implements Serializable {
 
     private Date orderDate;
 
-    private String qrcode;
+    private String qrCode;
 
     private Integer state;
 
@@ -44,12 +44,12 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public String getQrcode() {
-        return qrcode;
+    public String getQrCode() {
+        return qrCode;
     }
 
-    public void setQrcode(String qrcode) {
-        this.qrcode = qrcode;
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
     }
 
     public Integer getState() {

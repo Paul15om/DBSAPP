@@ -33,8 +33,6 @@ import retrofit2.Response;
 
 
 public class BarActivity extends AbstractActivity {
-    String mensaje1;
-    String mensaje2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,14 +60,14 @@ public class BarActivity extends AbstractActivity {
                 Toast.makeText(BarActivity.this, "Bar error", Toast.LENGTH_LONG).show();
             }
         });
-        LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Localizacion Local = new Localizacion();
-        Local.setMainActivity(this);
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Localizacion localization = new Localizacion();
+        localization.setMainActivity(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
-                Local);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
+                localization);
 
         showSnackBar("Localizacion agregada");
         showSnackBar("");
@@ -78,7 +76,7 @@ public class BarActivity extends AbstractActivity {
 
     private void setToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar); 
+        setSupportActionBar(toolbar);
     }
 
     @Override

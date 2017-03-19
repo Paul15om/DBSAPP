@@ -16,11 +16,9 @@ import pe.com.dbs.beerapp.activities.CatalogActivity;
 import pe.com.dbs.beerapp.constants.Constant;
 import pe.com.dbs.beerapp.models.Bar;
 
-
 /**
  * Created by JeralBenites on 25/02/2017.
  */
-
 public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
 
     private List<Bar> bars;

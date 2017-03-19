@@ -10,13 +10,13 @@ import java.util.Random;
 import pe.com.dbs.beerapp.R;
 
 public class SplashActivity extends AppCompatActivity {
-    private ProgressBar mProgress;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        mProgress = (ProgressBar) findViewById(R.id.splash_screen_progress_bar);
+        progressBar = (ProgressBar) findViewById(R.id.splash_screen_progress_bar);
 
         new Thread(new Runnable() {
             public void run() {
@@ -32,10 +32,10 @@ public class SplashActivity extends AppCompatActivity {
     private void doWork() {
         for (int progress = 0; progress < 100; progress += 30) {
             try {
-                Random rnd = new Random();
-                int num = (int) (rnd.nextDouble() * 600 + 100);
+                Random random = new Random();
+                int num = (int) (random.nextDouble() * 600 + 100);
                 Thread.sleep(num);
-                mProgress.setProgress(progress);
+                progressBar.setProgress(progress);
             } catch (Exception e) {
                 e.printStackTrace();
             }

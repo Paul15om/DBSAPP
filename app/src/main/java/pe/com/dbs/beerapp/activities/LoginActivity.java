@@ -44,23 +44,22 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
-    private CallbackManager mCallBackManager;
-    private Boolean mEstado = false;
+    private AutoCompleteTextView emailLogin;
+    private EditText passwordLogin;
+    private CallbackManager callbackManager;
+    private Boolean status = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mCallBackManager = CallbackManager.Factory.create();
-        TextView mSignUp = (TextView) findViewById(R.id.linkToLogin);
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.emailLogin);
-        mPasswordView = (EditText) findViewById(R.id.passwordLogin);
-        LoginButton mLoginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
-        mLoginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
-        mLoginButton.registerCallback(mCallBackManager, new FacebookCallback<LoginResult>() {
+        callbackManager = CallbackManager.Factory.create();
+        emailLogin = (AutoCompleteTextView) findViewById(R.id.emailLogin);
+        passwordLogin = (EditText) findViewById(R.id.passwordLogin);
+        LoginButton loginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                                     GraphResponse response) {
 
                                 try {
-                                    mEmailView.setText(object.getString("email"));
+                                    emailLogin.setText(object.getString("email"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -96,8 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.com_facebook_internet_permission_error_message, Toast.LENGTH_SHORT).show();
             }
         });
-        Button mEmailSignInButton = (Button) findViewById(R.id.loginButton);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        Button signInButton = (Button) findViewById(R.id.loginButton);
+        signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!isOnline()) {
@@ -107,15 +106,17 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
-        mSignUp.setOnClickListener(new OnClickListener() {
+
+        TextView signUp = (TextView) findViewById(R.id.linkToLogin);
+        signUp.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getFragmentManager();
                 new SignUp().show(fragmentManager, "Sign Up");
             }
         });
-        mEmailView.setText("george@dbs.com");
-        mPasswordView.setText("1234");
+        emailLogin.setText("george@dbs.com");
+        passwordLogin.setText("1234");
     }
 
     private boolean isOnline() {
@@ -133,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mCallBackManager.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -143,26 +144,26 @@ public class LoginActivity extends AppCompatActivity {
 
     private void attemptLogin() {
 
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        emailLogin.setError(null);
+        passwordLogin.setError(null);
 
-        final String email = mEmailView.getText().toString();
-        final String password = mPasswordView.getText().toString();
+        final String email = emailLogin.getText().toString();
+        final String password = passwordLogin.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+            passwordLogin.setError(getString(R.string.error_invalid_password));
+            focusView = passwordLogin;
             cancel = true;
         } else if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            emailLogin.setError(getString(R.string.error_field_required));
+            focusView = emailLogin;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            emailLogin.setError(getString(R.string.error_invalid_email));
+            focusView = emailLogin;
             cancel = true;
         }
         if (cancel) {
@@ -180,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (authToken != null) {
                         Constant.authToken = authToken;
                     }
-                    mEstado = authToken != null;
+                    status = authToken != null;
 
                 }
 
@@ -236,7 +237,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             if (dialog.isShowing()) {
                 dialog.dismiss();
-                if (mEstado) {
+                if (status) {
                     showAppointmentsScreen();
                 } else {
                     Toast.makeText(LoginActivity.this, getString(R.string.LoginNo), Toast.LENGTH_LONG).show();

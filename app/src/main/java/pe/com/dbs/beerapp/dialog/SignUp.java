@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import pe.com.dbs.beerapp.R;
-import pe.com.dbs.beerapp.activities.BarActivity;
 import pe.com.dbs.beerapp.factory.RetrofitFactory;
 import pe.com.dbs.beerapp.models.Customer;
 import pe.com.dbs.beerapp.service.CustomerService;
@@ -22,15 +21,12 @@ import retrofit2.Response;
 
 public class SignUp extends DialogFragment {
 
-    private static final String TAG = SignUp.class.getSimpleName();
-
     public SignUp() {
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         return createLoginDialog();
     }
 
@@ -65,14 +61,14 @@ public class SignUp extends DialogFragment {
 
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                if (response.code() ==200){
+                                if (response.code() == 200) {
                                     Toast.makeText(v.getContext(), "Se registro correctamente el usuario", Toast.LENGTH_LONG).show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<Void> call, Throwable t) {
-                                System.out.print("");
+
                             }
 
                         });

@@ -19,7 +19,6 @@ public class Customer {
         this.setPass(pass);
     }
 
-
     public Integer getCustomerId() {
         return customerId;
     }
