@@ -1,7 +1,8 @@
 package pe.com.dbs.beerapp.adapters;
 
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.androidnetworking.widget.ANImageView;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
@@ -51,6 +56,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         viewHolder.name.setText(bar.getName());
         viewHolder.address.setText(bar.getAddress());
         viewHolder.phone.setText(bar.getPhone());
+        viewHolder.imageView.setImageUrl(bar.getImage());
 
         viewHolder.barCardView.setOnClickListener(new View.OnClickListener() {
 
@@ -78,14 +84,14 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         private TextView address;
         private TextView phone;
         private CardView barCardView;
-        private ImageView imageView;
+        private ANImageView imageView;
 
         public ViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.barName);
             address = (TextView) v.findViewById(R.id.barAddress);
             phone = (TextView) v.findViewById(R.id.barPhone);
-            imageView = (ImageView) v.findViewById(R.id.barImageView);
+            imageView = (ANImageView) v.findViewById(R.id.barImageView);
             barCardView = (CardView) v.findViewById(R.id.barCardView);
         }
 

@@ -16,6 +16,8 @@ public class Product implements Serializable {
 
     private Integer categoryId;
 
+    private String image;
+
     private Category category;
 
     public Integer getProductId() {
@@ -58,6 +60,14 @@ public class Product implements Serializable {
         this.categoryId = categoryId;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -65,5 +75,4 @@ public class Product implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
-
 }

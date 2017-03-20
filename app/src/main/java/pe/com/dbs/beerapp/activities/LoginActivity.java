@@ -40,7 +40,6 @@ import pe.com.dbs.beerapp.factory.RetrofitFactory;
 import pe.com.dbs.beerapp.models.Customer;
 import pe.com.dbs.beerapp.service.LoginService;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {

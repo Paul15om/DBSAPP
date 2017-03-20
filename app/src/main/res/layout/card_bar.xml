@@ -12,14 +12,13 @@
         android:layout_height="305dp"
         android:layout_marginEnd="20dp">
 
-        <ImageView
+
+        <com.androidnetworking.widget.ANImageView
             android:id="@+id/barImageView"
             android:layout_width="120dp"
             android:layout_height="200dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/relativeLayout"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_alignStart="@+id/relativeLayout"/>
 
         <RelativeLayout
             android:id="@+id/relativeLayout"

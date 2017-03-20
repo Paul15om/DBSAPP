@@ -111,15 +111,15 @@ public class BarActivity extends AbstractActivity {
                 return true;
             }
 
-            private void filterBarsAndChangeDataset(String text){
+            private void filterBarsAndChangeDataset(String text) {
                 List<Bar> barsFiltered = new ArrayList<>();
-                for (Bar bar: bars) {
-                    if (bar.getName().toLowerCase().contains(text.toLowerCase())){
+                for (Bar bar : bars) {
+                    if (bar.getName().toLowerCase().contains(text.toLowerCase())) {
                         barsFiltered.add(bar);
                     }
                 }
 
-                ((BarAdapter)adapter).setBars(barsFiltered);
+                ((BarAdapter) adapter).setBars(barsFiltered);
                 adapter.notifyDataSetChanged();
 
             }

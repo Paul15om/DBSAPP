@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.androidnetworking.widget.ANImageView;
+
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
@@ -37,6 +39,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         Catalog catalog = catalogs.get(index);
         viewHolder.productName.setText(catalog.getProduct().getProductName());
         viewHolder.productPrice.setText(catalog.getUnitPrice().toString());
+        viewHolder.productImageView.setImageUrl(catalog.getProduct().getImage());
     }
 
     @Override
@@ -49,12 +52,14 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         private TextView productName;
         private TextView productPrice;
         private CardView catalogCardView;
+        private ANImageView productImageView;
 
         public ViewHolder(View v) {
             super(v);
             productName = (TextView) v.findViewById(R.id.productName);
             productPrice = (TextView) v.findViewById(R.id.productPrice);
             catalogCardView = (CardView) v.findViewById(R.id.catalogCardView);
+            productImageView= (ANImageView)v.findViewById(R.id.productImageView);
         }
 
     }
