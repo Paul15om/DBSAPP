@@ -30,6 +30,7 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import pe.com.dbs.beerapp.R;
@@ -169,28 +170,11 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            BackgroundTask task = new BackgroundTask(LoginActivity.this);
-            task.execute();
             LoginService loginService = RetrofitFactory.getRetrofitLogin().create(LoginService.class);
             Call<Void> call = loginService.login(new Customer(email, password));
-            call.enqueue(new Callback<Void>() {
 
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    String authToken = response.headers().get(Constant.AUTH_TOKEN);
-                    if (authToken != null) {
-                        Constant.authToken = authToken;
-                    }
-                    status = authToken != null;
-
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    System.out.println(t.getMessage());
-                }
-
-            });
+            BackgroundTask task = new BackgroundTask(LoginActivity.this);
+            task.execute(call);
 
         }
     }
@@ -208,20 +192,26 @@ public class LoginActivity extends AppCompatActivity {
         return password.length() >= 4;
     }
 
-    private class BackgroundTask extends AsyncTask<Void, Void, Void> {
+    private class BackgroundTask extends AsyncTask<Call<Void>, Void, Void> {
 
         private ProgressDialog dialog;
 
         BackgroundTask(LoginActivity activity) {
-
-            dialog = new ProgressDialog(activity);
+            this.dialog = new ProgressDialog(activity);
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(Call<Void>... params) {
             try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
+                Response<Void> response = params[0].execute();
+                String authToken = response.headers().get(Constant.AUTH_TOKEN);
+                if (authToken != null) {
+                    Constant.authToken = authToken;
+                }
+                status = authToken != null;
+                showAppointmentsScreen();
+
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return null;
