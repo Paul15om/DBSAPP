@@ -2,77 +2,69 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/barCardView"
     android:layout_width="match_parent"
-    android:layout_height="175dp"
+    android:layout_height="320dp"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="153dp"
+        android:layout_height="305dp"
         android:layout_marginEnd="20dp">
 
         <ImageView
             android:id="@+id/barImageView"
             android:layout_width="120dp"
-            android:layout_height="150dp"
-            android:contentDescription="@string/app_name"
+            android:layout_height="200dp"
             android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/relativeLayout"
+            android:contentDescription="@string/app_name"
             android:src="@mipmap/ic_launcher" />
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="158dp"
-        android:layout_height="151dp"
-        android:layout_marginStart="20dp">
-
-        <TextView
-            android:id="@+id/barName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="11dp"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <TextView
-            android:id="@+id/barAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/barName"
-            android:layout_marginTop="24dp"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/barPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/barAddress"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <TextView
-            android:id="@+id/barLatitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/barPhone"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="158dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/barPhone"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:layout_below="@+id/barImageView"
+            android:layout_marginStart="22dp"
+            android:background="#e0e0e0">
 
-        <TextView
-            android:id="@+id/barLongitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/barLatitude"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/barPhone"
-            android:layout_marginTop="14dp"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView
+                android:id="@+id/barName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="11dp"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#01579b" />
+
+            <TextView
+                android:id="@+id/barAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/barName"
+                android:layout_below="@+id/barName"
+                android:layout_marginTop="15dp"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#616161" />
+
+            <TextView
+                android:id="@+id/barPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/barAddress"
+                android:layout_below="@+id/barAddress"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#616161" />
+
+        </RelativeLayout>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
