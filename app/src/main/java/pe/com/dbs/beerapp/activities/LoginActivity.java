@@ -35,10 +35,10 @@ import java.util.Arrays;
 
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.constants.Constant;
-import pe.com.dbs.beerapp.dialog.SignUp;
-import pe.com.dbs.beerapp.factory.RetrofitFactory;
+import pe.com.dbs.beerapp.dialogs.SignUp;
+import pe.com.dbs.beerapp.factories.RetrofitFactory;
 import pe.com.dbs.beerapp.models.Customer;
-import pe.com.dbs.beerapp.service.LoginService;
+import pe.com.dbs.beerapp.services.LoginService;
 import retrofit2.Call;
 import retrofit2.Response;
 

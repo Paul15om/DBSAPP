@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.service;
+package pe.com.dbs.beerapp.services;
 
 import pe.com.dbs.beerapp.models.Customer;
 import retrofit2.Call;

@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.runtime;
+package pe.com.dbs.beerapp;
 
 import android.app.Application;
 

@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.factory;
+package pe.com.dbs.beerapp.factories;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

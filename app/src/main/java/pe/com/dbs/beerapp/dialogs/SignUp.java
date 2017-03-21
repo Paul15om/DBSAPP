@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.dialog;
+package pe.com.dbs.beerapp.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import pe.com.dbs.beerapp.R;
-import pe.com.dbs.beerapp.factory.RetrofitFactory;
+import pe.com.dbs.beerapp.factories.RetrofitFactory;
 import pe.com.dbs.beerapp.models.Customer;
-import pe.com.dbs.beerapp.service.CustomerService;
+import pe.com.dbs.beerapp.services.CustomerService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

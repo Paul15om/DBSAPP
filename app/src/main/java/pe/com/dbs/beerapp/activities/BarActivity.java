@@ -27,7 +27,7 @@ import java.util.Locale;
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.adapters.BarAdapter;
 import pe.com.dbs.beerapp.models.Bar;
-import pe.com.dbs.beerapp.service.BarService;
+import pe.com.dbs.beerapp.services.BarService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

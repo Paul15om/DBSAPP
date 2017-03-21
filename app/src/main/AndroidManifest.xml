@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
-        android:name=".runtime.BeerApp"
+        android:name=".BeerApp"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"

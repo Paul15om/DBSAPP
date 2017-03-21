@@ -12,7 +12,7 @@ import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.adapters.CatalogAdapter;
 import pe.com.dbs.beerapp.constants.Constant;
 import pe.com.dbs.beerapp.models.Catalog;
-import pe.com.dbs.beerapp.service.CatalogService;
+import pe.com.dbs.beerapp.services.CatalogService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

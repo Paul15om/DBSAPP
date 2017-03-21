@@ -1,4 +1,4 @@
-package pe.com.dbs.beerapp.service;
+package pe.com.dbs.beerapp.services;
 
 import java.util.List;
 
