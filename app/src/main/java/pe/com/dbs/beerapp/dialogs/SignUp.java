@@ -45,14 +45,16 @@ public class SignUp extends DialogFragment {
         dateBornSingUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final Calendar c = Calendar.getInstance();
+                int YEAR_18 = c.get(Calendar.YEAR) - 19;
                 DatePickerDialog dpd = new DatePickerDialog(v.getContext(),
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 dateBornSingUp.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                             }
-                        }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DATE));
+                        }, YEAR_18, c.get(Calendar.MONTH), c.get(Calendar.DATE));
                 dpd.show();
             }
         });

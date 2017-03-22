@@ -13,7 +13,7 @@ import retrofit2.Retrofit;
 
 public abstract class AbstractActivity extends AppCompatActivity {
 
-    protected final Retrofit retrofit;
+    public static Retrofit retrofit;
 
     public AbstractActivity() {
         retrofit = RetrofitFactory.getRetrofit();

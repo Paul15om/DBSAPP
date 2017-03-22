@@ -31,7 +31,6 @@ public class RetrofitFactory {
                             .header(Constant.AUTH_TOKEN, Constant.authToken)
                             .method(requestOriginal.method(), requestOriginal.body())
                             .build();
-
                     return chain.proceed(request);
                 }
 
