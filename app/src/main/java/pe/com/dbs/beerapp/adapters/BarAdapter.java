@@ -1,21 +1,16 @@
 package pe.com.dbs.beerapp.adapters;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidnetworking.widget.ANImageView;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
