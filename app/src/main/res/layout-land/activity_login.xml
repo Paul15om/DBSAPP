@@ -11,7 +11,13 @@
     android:fillViewport="true"
     android:background="@drawable/holi"
     tools:context="pe.com.dbs.beerapp.activities.LoginActivity">
-
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
@@ -104,9 +110,7 @@
                     android:text="@string/Registrar1"
                     android:textSize="20sp"
                     android:textColor="#025f7c" />
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
