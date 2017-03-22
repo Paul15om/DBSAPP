@@ -1,11 +1,12 @@
 package pe.com.dbs.beerapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.orm.SugarRecord;
 
 import java.math.BigDecimal;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Bar {
+public class Bar extends SugarRecord {
 
     private Integer barId;
 

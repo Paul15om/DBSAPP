@@ -17,7 +17,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -27,10 +26,6 @@ import java.util.Locale;
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.adapters.BarAdapter;
 import pe.com.dbs.beerapp.models.Bar;
-import pe.com.dbs.beerapp.services.BarService;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class BarActivity extends AbstractActivity {
@@ -43,13 +38,7 @@ public class BarActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar);
         setToolbar();
-        BarService barService = retrofit.create(BarService.class);
-        Call<List<Bar>> call = barService.findAll();
-        call.enqueue(new Callback<List<Bar>>() {
-
-            @Override
-            public void onResponse(Call<List<Bar>> call, Response<List<Bar>> response) {
-                bars = response.body();
+        List<Bar> barList = Bar.listAll(Bar.class);
 
                 RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
                 recycler.setHasFixedSize(true);
@@ -57,16 +46,10 @@ public class BarActivity extends AbstractActivity {
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
                 recycler.setLayoutManager(layoutManager);
 
-                adapter = new BarAdapter(bars);
+        adapter = new BarAdapter(barList);
                 recycler.setAdapter(adapter);
 
-            }
 
-            @Override
-            public void onFailure(Call<List<Bar>> call, Throwable t) {
-                Toast.makeText(BarActivity.this, "Bar error", Toast.LENGTH_LONG).show();
-            }
-        });
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Localizacion localization = new Localizacion();
         localization.setMainActivity(this);
@@ -186,6 +169,15 @@ public class BarActivity extends AbstractActivity {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
+
+
+          /*  List<Bar> asdasd1 = SugarRecord.listAll(Bar.class);
+
+            List<Bar> asdasd2 = Bar.listAll(Bar.class);
+
+            List<Bar> SASDD = Bar.find(Bar.class, "id = ?", "232");
+
+            Bar asdasd = Bar.find(Bar.class, "id = ?", "232").get(0);*/
         }
 
     }
