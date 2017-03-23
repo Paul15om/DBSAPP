@@ -30,18 +30,4 @@
         android:id="@+id/gifImageView" />
 
 
-    <TextView
-        android:id="@+id/LoadingTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:keepScreenOn="true"
-        android:layout_below="@+id/splash_screen_progress_bar"
-        android:text=" ... "
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        tools:ignore="HardcodedText"
-        android:gravity="center"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp" />
-
 </RelativeLayout>
