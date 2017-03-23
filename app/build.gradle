@@ -9,13 +9,13 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
         }
     }
     packagingOptions {
@@ -29,6 +29,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //compile 'com.google.android.gms:play-services-location:10.2.1'
     compile 'com.android.support:appcompat-v7:25.3.0'
     //Gifs
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.5'
@@ -53,7 +54,7 @@ dependencies {
     //okhttp3
     compile 'com.squareup.okhttp3:okhttp:3.4.2'
     //google
-
     compile 'com.google.android.gms:play-services-maps:10.2.1'
-    compile 'com.google.android.gms:play-services-location:10.2.1'
+
+    // compile 'com.google.android.gms:play-services:10.2.1'
 }
