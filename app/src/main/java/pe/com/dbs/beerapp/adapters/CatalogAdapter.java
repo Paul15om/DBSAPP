@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidnetworking.widget.ANImageView;
@@ -44,7 +44,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
                 onClickCheckBox(1, numberProduct, viewHolder.checkBox, viewHolder.numberProduct);
             }
         });
-        viewHolder.upButton.setOnClickListener(new View.OnClickListener() {
+        viewHolder.numberProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int numberProduct = Integer.parseInt(viewHolder.numberProduct.getText().toString()) + 1;
@@ -98,8 +98,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         private TextView productPrice;
         private ANImageView productImageView;
         private CheckBox checkBox;
-        private ImageButton upButton;
-        private ImageButton downButton;
+        private ImageView downButton;
         private TextView numberProduct;
 
         public ViewHolder(View v) {
@@ -108,8 +107,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
             productPrice = (TextView) v.findViewById(R.id.productPrice);
             productImageView = (ANImageView) v.findViewById(R.id.productImageView);
             checkBox = (CheckBox) v.findViewById(R.id.itemCheckBox);
-            upButton = (ImageButton) v.findViewById(R.id.upButton);
-            downButton = (ImageButton) v.findViewById(R.id.downButton);
+            downButton = (ImageView) v.findViewById(R.id.downButton);
             numberProduct = (TextView) v.findViewById(R.id.numberProduct);
         }
 

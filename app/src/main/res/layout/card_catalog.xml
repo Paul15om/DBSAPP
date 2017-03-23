@@ -37,41 +37,28 @@
                 android:text="Small Text"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <RelativeLayout
-                android:layout_width="400dp"
-                android:layout_height="100dp"
-                android:layout_alignEnd="@+id/productPrice"
-                android:layout_alignStart="@+id/productPrice"
+
+            <TextView
+                android:id="@+id/numberProduct"
+                android:layout_width="56dp"
+                android:layout_height="20dp"
+                android:text="0"
+                android:layout_marginTop="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:layout_below="@+id/productPrice"
-                android:layout_marginTop="10dp">
+                android:layout_alignStart="@+id/productPrice" />
 
-                <TextView
-                    android:id="@+id/numberProduct"
-                    android:layout_width="56dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginTop="10dp"
-                    android:text="0"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            <ImageView
+                android:clickable="true"
+                android:id="@+id/downButton"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_alignBottom="@+id/numberProduct"
+                android:layout_alignTop="@+id/numberProduct"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="-2dp"
+                android:src="@drawable/ic_arrow_drop_down_circle_black_24dp" />
 
-                <ImageButton
-                    android:id="@+id/upButton"
-                    android:layout_width="10dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="-14dp"
-                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp" />
-
-
-                <ImageButton
-                    android:id="@+id/downButton"
-                    android:layout_width="10dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_below="@+id/upButton"
-                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
-            </RelativeLayout>
         </RelativeLayout>
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
