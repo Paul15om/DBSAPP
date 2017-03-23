@@ -11,6 +11,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.orm.SugarRecord;
 
@@ -123,6 +124,16 @@ public class BarActivity extends AbstractActivity {
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Location:
+                showSnackBar("Tu Posicion es 777");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
           /*  List<Bar> asdasd1 = SugarRecord.listAll(Bar.class);
 
             List<Bar> asdasd2 = Bar.listAll(Bar.class);
