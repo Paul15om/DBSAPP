@@ -48,15 +48,15 @@
             android:id="@+id/barPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/barAddress"
-            android:layout_alignBottom="@+id/barAddress"
-            android:layout_toEndOf="@+id/barAddress"
             android:maxLines="3"
             android:padding="8dp"
             android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#666"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_below="@+id/barName"
+            android:layout_toEndOf="@+id/barName"
+            android:layout_marginStart="39dp" />
 
         <ImageButton
             android:layout_marginBottom="20dp"
