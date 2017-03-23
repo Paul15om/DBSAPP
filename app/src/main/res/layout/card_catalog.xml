@@ -2,50 +2,98 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/catalogCardView"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
+    android:layout_height="150dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="6dp"
     card_view:cardUseCompatPadding="true">
 
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="243dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/productName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="16dp"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <TextView
+                android:id="@+id/productPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/productName"
+                android:layout_centerVertical="true"
+                android:text="Small Text"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <RelativeLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/productPrice"
+                android:layout_alignStart="@+id/productPrice"
+                android:layout_marginTop="16dp"
+                android:layout_alignEnd="@+id/productPrice">
+
+                <TextView
+                    android:id="@+id/numberProduct"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="300dp"
+                    android:layout_height="20dp"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="1         "
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+                <ImageButton
+                    android:id="@+id/upButton"
+                    android:layout_marginTop="-5dp"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_24dp"
+                    android:layout_alignParentEnd="true" />
 
 
-        <com.androidnetworking.widget.ANImageView
-            android:id="@+id/productImageView"
+                <ImageButton
+                    android:id="@+id/downButton"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/upButton"
+                    android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/productName"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/productName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_above="@+id/productPrice"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="11dp" />
+            <com.androidnetworking.widget.ANImageView
+                android:id="@+id/productImageView"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_satellite_black_24dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/productPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Small Text"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/productName" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -30,5 +30,14 @@
         </android.support.design.widget.AppBarLayout>
     </android.support.design.widget.CoordinatorLayout>
 
+    <TextView
+        android:id="@+id/latitude_textview"
+        android:layout_width="200dp"
+        android:layout_height="50dp" />
 
+    <TextView
+        android:id="@+id/longitude_textview"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/latitude_textview" />
 </RelativeLayout>

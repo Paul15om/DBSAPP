@@ -2,68 +2,61 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/barCardView"
     android:layout_width="match_parent"
-    android:layout_height="320dp"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
+    android:layout_height="280dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="6dp"
     card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="305dp"
-        android:layout_marginEnd="20dp">
-
+        android:layout_height="260dp">
 
         <com.androidnetworking.widget.ANImageView
             android:id="@+id/barImageView"
-            android:layout_width="120dp"
-            android:layout_height="200dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/relativeLayout"/>
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_satellite_black_24dp" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="158dp"
-            android:layout_height="100dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true"
+        <TextView
+            android:id="@+id/barName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/barImageView"
-            android:layout_marginStart="22dp"
-            android:background="#e0e0e0">
+            android:maxLines="3"
+            android:padding="8dp"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#222"
+            android:textSize="22dp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/barName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="11dp"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#01579b" />
+        <TextView
+            android:id="@+id/barAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/barName"
+            android:maxLines="3"
+            android:padding="8dp"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#666"
+            android:textSize="14dp" />
 
-            <TextView
-                android:id="@+id/barAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/barName"
-                android:layout_below="@+id/barName"
-                android:layout_marginTop="15dp"
-                android:text="Small Text"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#616161" />
+        <TextView
+            android:id="@+id/barPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/barAddress"
+            android:layout_alignBottom="@+id/barAddress"
+            android:layout_toEndOf="@+id/barAddress"
+            android:maxLines="3"
+            android:padding="8dp"
+            android:text="Small Text"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#666"
+            android:textSize="14dp" />
 
-            <TextView
-                android:id="@+id/barPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/barAddress"
-                android:layout_below="@+id/barAddress"
-                android:text="Small Text"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="#616161" />
-
-        </RelativeLayout>
     </RelativeLayout>
-
 </android.support.v7.widget.CardView>
