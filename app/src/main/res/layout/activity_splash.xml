@@ -17,8 +17,7 @@
         android:layout_height="wrap_content"
         style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
         android:layout_marginEnd="5dp"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/LoadingTextView" />
+        android:layout_centerVertical="true" />
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="100dp"
