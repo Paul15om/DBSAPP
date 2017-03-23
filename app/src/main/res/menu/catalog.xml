@@ -4,7 +4,7 @@
     tools:context=".activities.CatalogActivity">
     <item
         android:id="@+id/order"
-        android:icon="@drawable/ic_adjust_black_24dp"
+        android:icon="@drawable/ic_check_box_black_24dp"
         android:title="Order"
         app:showAsAction="always" />
 
