@@ -174,7 +174,6 @@ public class LoginActivity extends AppCompatActivity {
 
             BackgroundTask task = new BackgroundTask(LoginActivity.this);
             task.execute(call);
-
         }
     }
 
@@ -208,7 +207,6 @@ public class LoginActivity extends AppCompatActivity {
                     Constant.authToken = authToken;
                 }
                 status = authToken != null;
-                showAppointmentsScreen();
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -233,7 +231,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         }
-
-
     }
+
+
 }

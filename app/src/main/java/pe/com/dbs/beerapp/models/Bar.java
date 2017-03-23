@@ -1,9 +1,11 @@
 package pe.com.dbs.beerapp.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.orm.dsl.Table;
 
 import java.math.BigDecimal;
 
+@Table
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Bar {
 

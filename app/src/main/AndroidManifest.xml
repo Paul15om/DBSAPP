@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
-        android:name=".BeerApp"
+        android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +20,18 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="DATABASE"
+            android:value="bd_bar.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="2" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="pe.com.dbs.beerapp" />
 
         <activity
             android:name=".activities.SplashActivity"

@@ -1,28 +1,19 @@
 package pe.com.dbs.beerapp.activities;
 
-import android.Manifest;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.Toast;
 
-import java.io.IOException;
+import com.orm.SugarRecord;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.adapters.BarAdapter;
@@ -46,39 +37,27 @@ public class BarActivity extends AbstractActivity {
         BarService barService = retrofit.create(BarService.class);
         Call<List<Bar>> call = barService.findAll();
         call.enqueue(new Callback<List<Bar>>() {
-
             @Override
             public void onResponse(Call<List<Bar>> call, Response<List<Bar>> response) {
+                SugarRecord.deleteAll(Bar.class);
                 bars = response.body();
-
-                RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
-                recycler.setHasFixedSize(true);
-
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
-                recycler.setLayoutManager(layoutManager);
-
-                adapter = new BarAdapter(bars);
-                recycler.setAdapter(adapter);
-
+                SugarRecord.saveInTx(bars);
             }
 
             @Override
             public void onFailure(Call<List<Bar>> call, Throwable t) {
-                Toast.makeText(BarActivity.this, "Bar error", Toast.LENGTH_LONG).show();
+
             }
         });
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Localizacion localization = new Localizacion();
-        localization.setMainActivity(this);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0,
-                localization);
+        List<Bar> listBar = SugarRecord.listAll(Bar.class);
+        RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
+        recycler.setHasFixedSize(true);
 
-        showSnackBar("Localizacion agregada");
-        showSnackBar("");
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
+        recycler.setLayoutManager(layoutManager);
 
+        RecyclerView.Adapter adapter = new BarAdapter(listBar);
+        recycler.setAdapter(adapter);
     }
 
     private void setToolbar() {
@@ -101,13 +80,26 @@ public class BarActivity extends AbstractActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterBarsAndChangeDataset(newText);
+                //  filterBarsAndChangeDataset(newText);
+                List<Bar> SASDD = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where name like '%" + newText + "%'");
+                RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
+                recycler.setHasFixedSize(true);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
+                recycler.setLayoutManager(layoutManager);
+                RecyclerView.Adapter adapter = new BarAdapter(SASDD);
+                recycler.setAdapter(adapter);
                 return true;
             }
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                filterBarsAndChangeDataset(query);
+                List<Bar> SASDD = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where name like '%" + query + "%'");
+                RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
+                recycler.setHasFixedSize(true);
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
+                recycler.setLayoutManager(layoutManager);
+                RecyclerView.Adapter adapter = new BarAdapter(SASDD);
+                recycler.setAdapter(adapter);
                 return true;
             }
 
@@ -136,58 +128,14 @@ public class BarActivity extends AbstractActivity {
                 .show();
     }
 
-    private void setLocation(Location location) {
-        if (location.getLatitude() != 0.0 && location.getLongitude() != 0.0) {
-            try {
-                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-                List<Address> addresses = geocoder.getFromLocation(
-                        location.getLatitude(), location.getLongitude(), 1);
-                if (!addresses.isEmpty()) {
-                    Address address = addresses.get(0);
-                    showSnackBar("Mi direccion es: \n" + address.getAddressLine(0));
-                }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+          /*  List<Bar> asdasd1 = SugarRecord.listAll(Bar.class);
 
-    private class Localizacion implements LocationListener {
-        BarActivity mainActivity;
+            List<Bar> asdasd2 = Bar.listAll(Bar.class);
 
-        public BarActivity getMainActivity() {
-            return mainActivity;
-        }
+            List<Bar> SASDD = Bar.find(Bar.class, "id = ?", "232");
 
-        void setMainActivity(BarActivity mainActivity) {
-            this.mainActivity = mainActivity;
-        }
+            Bar asdasd = Bar.find(Bar.class, "id = ?", "232").get(0);*/
 
-        @Override
-        public void onLocationChanged(Location location) {
-            location.getLatitude();
-            location.getLongitude();
-            String text = "Mi ubicacion actual es: " + "\n Lat = "
-                    + location.getLatitude() + "\n Long = " + location.getLongitude();
-            showSnackBar(text);
-            this.mainActivity.setLocation(location);
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            showSnackBar("GPS Desactivado");
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            showSnackBar("GPS Activado");
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-        }
-
-    }
 
 }

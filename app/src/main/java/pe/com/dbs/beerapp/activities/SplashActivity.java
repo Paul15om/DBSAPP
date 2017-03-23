@@ -2,31 +2,32 @@ package pe.com.dbs.beerapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import java.util.List;
 import java.util.Random;
 
 import pe.com.dbs.beerapp.R;
+import pe.com.dbs.beerapp.models.Bar;
 
-public class SplashActivity extends AppCompatActivity {
+
+public class SplashActivity extends AbstractActivity {
     private ProgressBar progressBar;
-
-    @Override
+    private TextView textAlert;
+    private List<Bar> bars1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        textAlert = (TextView) findViewById(R.id.LoadingTextView);
         progressBar = (ProgressBar) findViewById(R.id.splash_screen_progress_bar);
-
         new Thread(new Runnable() {
             public void run() {
                 doWork();
                 finish();
                 startApp();
-
             }
         }).start();
-
     }
 
     private void doWork() {
@@ -44,5 +45,10 @@ public class SplashActivity extends AppCompatActivity {
 
     private void startApp() {
         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+    }
+
+
+    public void showMessage(String alert) {
+        textAlert.setText(alert);
     }
 }

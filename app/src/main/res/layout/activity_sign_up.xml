@@ -40,7 +40,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/dateBornLayout"
+            android:id="@+id/dateBornAuto"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
@@ -50,9 +50,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/dateBorn"
-                android:inputType="date" />
-
+                android:inputType="none"
+                android:hint="@string/dateBorn" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
