@@ -39,35 +39,35 @@
 
             <RelativeLayout
                 android:layout_width="400dp"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_alignEnd="@+id/productPrice"
                 android:layout_alignStart="@+id/productPrice"
                 android:layout_below="@+id/productPrice"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:id="@+id/numberProduct"
-                    android:layout_width="300dp"
+                    android:layout_width="56dp"
                     android:layout_height="20dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="0"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <ImageButton
                     android:id="@+id/upButton"
                     android:layout_width="10dp"
-                    android:layout_height="20dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="-5dp"
+                    android:layout_marginTop="-14dp"
                     android:src="@drawable/ic_keyboard_arrow_up_black_24dp" />
 
 
                 <ImageButton
                     android:id="@+id/downButton"
                     android:layout_width="10dp"
-                    android:layout_height="20dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
                     android:layout_below="@+id/upButton"
                     android:src="@drawable/ic_keyboard_arrow_down_black_24dp" />
