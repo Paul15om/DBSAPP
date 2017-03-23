@@ -17,8 +17,7 @@
         android:layout_height="wrap_content"
         style="@android:style/Widget.DeviceDefault.ProgressBar.Horizontal"
         android:layout_marginEnd="5dp"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/LoadingTextView" />
+        android:layout_centerVertical="true" />
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="100dp"
@@ -29,19 +28,5 @@
         android:layout_marginBottom="18dp"
         android:id="@+id/gifImageView" />
 
-
-    <TextView
-        android:id="@+id/LoadingTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:keepScreenOn="true"
-        android:layout_below="@+id/splash_screen_progress_bar"
-        android:text=" ... "
-        android:textColor="@android:color/white"
-        android:textSize="15sp"
-        tools:ignore="HardcodedText"
-        android:gravity="center"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp" />
 
 </RelativeLayout>
