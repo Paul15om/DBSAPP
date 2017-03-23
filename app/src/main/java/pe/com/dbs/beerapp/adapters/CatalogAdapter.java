@@ -40,52 +40,53 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                objCabecera.add(catalog.getProductId().toString());
-                objCabecera.add(catalog.getUnitPrice().toString());
-                objCabecera.add(viewHolder.numberProduct.getText().toString());
+                int numberProduct = Integer.parseInt(viewHolder.numberProduct.getText().toString());
+                onClickCheckBox(1, numberProduct, viewHolder.checkBox, viewHolder.numberProduct);
             }
         });
         viewHolder.upButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int numberProduct = Integer.parseInt(viewHolder.numberProduct.getText().toString()) + 1;
-                if (numberProduct == 0) {
-                    viewHolder.checkBox.setChecked(false);
-                    viewHolder.numberProduct.setText(numberProduct + "");
-                }
-                if (numberProduct < 0) {
-                    viewHolder.checkBox.setChecked(false);
-                    viewHolder.numberProduct.setText("0");
-                }
-                if (numberProduct > 0) {
-                    viewHolder.checkBox.setChecked(true);
-                    viewHolder.numberProduct.setText(numberProduct + "");
-                    objCabecera.add(catalog.getProductId().toString());
-                    objCabecera.add(catalog.getUnitPrice().toString());
-                    objCabecera.add(viewHolder.numberProduct.getText().toString());
-                }
+                onClickCheckBox(0, numberProduct, viewHolder.checkBox, viewHolder.numberProduct);
+
+
             }
         });
         viewHolder.downButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int numberProduct = Integer.parseInt(viewHolder.numberProduct.getText().toString()) - 1;
-                if (numberProduct == 0) {
-                    viewHolder.checkBox.setChecked(false);
-                    viewHolder.numberProduct.setText(numberProduct + "");
-                }
-                if (numberProduct > 0) {
-                    viewHolder.checkBox.setChecked(true);
-                    viewHolder.numberProduct.setText(numberProduct + "");
-                }
-                if (numberProduct < 0) {
-                    viewHolder.checkBox.setChecked(false);
-                    viewHolder.numberProduct.setText("0");
-                }
+                onClickCheckBox(0, numberProduct, viewHolder.checkBox, viewHolder.numberProduct);
+
             }
         });
     }
 
+    public void onClickCheckBox(int tipo, int Number, CheckBox checkBox, TextView numberProduct) {
+        if (tipo == 0) {
+            if (Number == 0) {
+                checkBox.setChecked(false);
+                numberProduct.setText(Number + "");
+            }
+            if (Number > 0) {
+                checkBox.setChecked(true);
+                numberProduct.setText(Number + "");
+            }
+            if (Number < 0) {
+                checkBox.setChecked(false);
+                numberProduct.setText("0");
+            }
+        } else if (tipo == 1) {
+            if (checkBox.isChecked()) {
+                if (Number == 0) {
+                    numberProduct.setText("1");
+                }
+            } else if (!checkBox.isChecked()) {
+                numberProduct.setText("0");
+            }
+        }
+    }
     @Override
     public int getItemCount() {
         return catalogs.size();
