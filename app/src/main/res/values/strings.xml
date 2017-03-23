@@ -24,6 +24,6 @@
 
     <string name="loading">Cargando</string>
     <string name="Search">Buscando</string>
-    <string name="title_activity_catalog">Catálogo de productos</string>
+    <string name="title_activity_catalog"></string>
 
 </resources>

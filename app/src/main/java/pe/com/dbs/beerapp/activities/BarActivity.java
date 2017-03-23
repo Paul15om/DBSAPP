@@ -2,17 +2,18 @@ package pe.com.dbs.beerapp.activities;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 
 import com.orm.SugarRecord;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
@@ -26,6 +27,10 @@ import retrofit2.Response;
 
 public class BarActivity extends AbstractActivity {
 
+    protected LocationManager locationManager;
+    boolean isGPSEnabled = false;
+    boolean isNetworkEnabled = false;
+    boolean canGetLocation = false;
     private List<Bar> bars;
     private RecyclerView.Adapter adapter;
 
@@ -34,6 +39,21 @@ public class BarActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar);
         setToolbar();
+        loadBars();
+        searchBar("", 0);
+    }
+
+
+    public String Estado(boolean value) {
+        return String.valueOf(value);
+    }
+
+    private void setToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    private void loadBars() {
         BarService barService = retrofit.create(BarService.class);
         Call<List<Bar>> call = barService.findAll();
         call.enqueue(new Callback<List<Bar>>() {
@@ -43,28 +63,29 @@ public class BarActivity extends AbstractActivity {
                 bars = response.body();
                 SugarRecord.saveInTx(bars);
             }
-
             @Override
             public void onFailure(Call<List<Bar>> call, Throwable t) {
 
             }
         });
-        List<Bar> listBar = SugarRecord.listAll(Bar.class);
+    }
+
+    private void searchBar(String Text, int state) {
+        List<Bar> Query = null;
+        if (state == 1) {
+            Log.d("LogsAndroid", "Mensaje de depuración1");
+            Query = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where name like '%" + Text + "%'");
+        } else if (state != 1) {
+            Log.d("LogsAndroid", "Mensaje de depuración2");
+            Query = SugarRecord.listAll(Bar.class);
+        }
         RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
         recycler.setHasFixedSize(true);
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
         recycler.setLayoutManager(layoutManager);
-
-        RecyclerView.Adapter adapter = new BarAdapter(listBar);
+        RecyclerView.Adapter adapter = new BarAdapter(Query);
         recycler.setAdapter(adapter);
     }
-
-    private void setToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -80,42 +101,15 @@ public class BarActivity extends AbstractActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //  filterBarsAndChangeDataset(newText);
-                List<Bar> SASDD = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where name like '%" + newText + "%'");
-                RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
-                recycler.setHasFixedSize(true);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
-                recycler.setLayoutManager(layoutManager);
-                RecyclerView.Adapter adapter = new BarAdapter(SASDD);
-                recycler.setAdapter(adapter);
+                searchBar(newText, 1);
                 return true;
             }
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                List<Bar> SASDD = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where name like '%" + query + "%'");
-                RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
-                recycler.setHasFixedSize(true);
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(BarActivity.this);
-                recycler.setLayoutManager(layoutManager);
-                RecyclerView.Adapter adapter = new BarAdapter(SASDD);
-                recycler.setAdapter(adapter);
+                searchBar(query, 1);
                 return true;
             }
-
-            private void filterBarsAndChangeDataset(String text) {
-                List<Bar> barsFiltered = new ArrayList<>();
-                for (Bar bar : bars) {
-                    if (bar.getName().toLowerCase().contains(text.toLowerCase())) {
-                        barsFiltered.add(bar);
-                    }
-                }
-
-                ((BarAdapter) adapter).setBars(barsFiltered);
-                adapter.notifyDataSetChanged();
-
-            }
-
         };
         assert searchView != null;
         searchView.setOnQueryTextListener(queryTextListener);

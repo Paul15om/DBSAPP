@@ -14,10 +14,6 @@ import java.util.List;
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.models.Catalog;
 
-/**
- * Created by jalvarea on 05/03/2017.
- */
-
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
 
     private List<Catalog> catalogs;
@@ -38,7 +34,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
     public void onBindViewHolder(ViewHolder viewHolder, int index) {
         Catalog catalog = catalogs.get(index);
         viewHolder.productName.setText(catalog.getProduct().getProductName());
-        viewHolder.productPrice.setText(catalog.getUnitPrice().toString());
+        viewHolder.productPrice.setText("S/." + catalog.getUnitPrice().toString());
         viewHolder.productImageView.setImageUrl(catalog.getProduct().getImage());
     }
 
