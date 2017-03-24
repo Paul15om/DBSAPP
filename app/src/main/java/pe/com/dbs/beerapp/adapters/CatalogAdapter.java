@@ -20,6 +20,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
 
     private List<Catalog> catalogs;
     public static ArrayList<String> objCabecera = new ArrayList<>();
+
     public CatalogAdapter(List<Catalog> catalogs) {
         this.catalogs = catalogs;
     }
@@ -63,7 +64,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         });
     }
 
-    public void onClickCheckBox(int tipo, int Number, CheckBox checkBox, TextView numberProduct) {
+    private void onClickCheckBox(int tipo, int Number, CheckBox checkBox, TextView numberProduct) {
         if (tipo == 0) {
             if (Number == 0) {
                 checkBox.setChecked(false);
@@ -87,6 +88,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
             }
         }
     }
+
     @Override
     public int getItemCount() {
         return catalogs.size();
