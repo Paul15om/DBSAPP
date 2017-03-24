@@ -29,27 +29,35 @@
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="S/."
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/money"
+                android:layout_centerVertical="true"
+                android:layout_alignStart="@+id/productName" />
+
+            <TextView
                 android:id="@+id/productPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/productName"
-                android:layout_centerVertical="true"
                 android:text="Small Text"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/money" />
 
 
             <TextView
                 android:id="@+id/numberProduct"
                 android:layout_width="56dp"
                 android:layout_height="20dp"
-                android:text="0"
-                android:layout_marginTop="10dp"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_alignStart="@+id/money"
                 android:layout_below="@+id/productPrice"
-                android:layout_alignStart="@+id/productPrice" />
+                android:layout_marginTop="10dp"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <ImageView
-                android:clickable="true"
                 android:id="@+id/downButton"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
@@ -57,6 +65,7 @@
                 android:layout_alignTop="@+id/numberProduct"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="-2dp"
+                android:clickable="true"
                 android:src="@drawable/ic_arrow_drop_down_circle_black_24dp" />
 
         </RelativeLayout>

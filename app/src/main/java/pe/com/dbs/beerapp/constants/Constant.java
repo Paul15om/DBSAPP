@@ -15,4 +15,5 @@ public final class Constant {
     public static String LATITUDE = "latitude";
     public static String LONGITUDE = "longitude";
     public static String BARNAME = "barname";
+    public static String NUMBER = "number";
 }

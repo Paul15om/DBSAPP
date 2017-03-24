@@ -52,7 +52,7 @@ public class SignUp extends DialogFragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                dateBornSingUp.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                                dateBornSingUp.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
                             }
                         }, YEAR_18, c.get(Calendar.MONTH), c.get(Calendar.DATE));
                 dpd.show();
@@ -62,23 +62,29 @@ public class SignUp extends DialogFragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(final View v) {
+                        String email = emailSingUp.getText().toString();
+                        String pass = passwordSingUp.getText().toString();
+                        String birth = dateBornSingUp.getText().toString();
                         Customer customer = new Customer();
-                        customer.setEmail(emailSingUp.getText().toString());
-                        customer.setPass(passwordSingUp.getText().toString());
-                        customer.setBirthDate(dateBornSingUp.getText().toString());
+                        customer.setEmail(email);
+                        customer.setPass(pass);
+                        customer.setBirthDate(birth);
                         CustomerService customerService = RetrofitFactory.getRetrofitLogin().create(CustomerService.class);
                         Call<Void> call = customerService.save(customer);
                         call.enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                // if (response.code() == 200) {
-                                dismiss();
-                                //Toast.makeText(v.getContext(), "Se registro correctamente el usuario", Toast.LENGTH_LONG).show();
-                                //}
+                                if (response.code() == 200) {
+                                    Toast.makeText(v.getContext(), "Se registro correctamente el usuario", Toast.LENGTH_LONG).show();
+                                    dismiss();
+                                } else if (response.code() == 500) {
+                                    Toast.makeText(v.getContext(), "No se registro", Toast.LENGTH_LONG).show();
+                                    dismiss();
+                                }
                             }
                             @Override
                             public void onFailure(Call<Void> call, Throwable t) {
-                                Toast.makeText(v.getContext(), "entre3", Toast.LENGTH_LONG).show();
+                                //Toast.makeText(v.getContext(), "entre3", Toast.LENGTH_LONG).show();
                             }
                         });
                     }

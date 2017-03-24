@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordLogin;
     private CallbackManager callbackManager;
     private Boolean status = false;
+    LoginService loginService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         callbackManager = CallbackManager.Factory.create();
+        loginService = RetrofitFactory.getRetrofitLogin().create(LoginService.class);
         emailLogin = (AutoCompleteTextView) findViewById(R.id.emailLogin);
         passwordLogin = (EditText) findViewById(R.id.passwordLogin);
         LoginButton loginButton = (LoginButton) findViewById(R.id.loginButtonFacebook);
@@ -169,7 +171,7 @@ public class LoginActivity extends AppCompatActivity {
         if (cancel) {
             focusView.requestFocus();
         } else {
-            LoginService loginService = RetrofitFactory.getRetrofitLogin().create(LoginService.class);
+
             Call<Void> call = loginService.login(new Customer(email, password));
 
             BackgroundTask task = new BackgroundTask(LoginActivity.this);

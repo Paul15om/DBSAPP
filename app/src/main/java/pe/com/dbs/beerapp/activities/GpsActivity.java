@@ -1,14 +1,20 @@
 package pe.com.dbs.beerapp.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
+import android.graphics.Color;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.ImageView;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,34 +23,38 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
+import pe.com.dbs.beerapp.DirectionsJSONParser;
 import pe.com.dbs.beerapp.R;
+import pe.com.dbs.beerapp.TrackGPS;
 import pe.com.dbs.beerapp.constants.Constant;
 
 public class GpsActivity extends FragmentActivity
-        implements OnMapReadyCallback
-        //, GoogleApiClient.ConnectionCallbacks
-        //, GoogleApiClient.OnConnectionFailedListener
-        //, LocationListener
-        //
-{
+        implements OnMapReadyCallback {
 
-    private Location mLocation;
-    // private LocationRequest mLocationRequest;
-    private long UPDATE_INTERVAL = 2 * 1000;  /* 10 secs */
-    private long FASTEST_INTERVAL = 2000; /* 2 sec */
-    private GoogleApiClient mGoogleApiClient;
-    final String TAG = "RegisterActivity";
     private GoogleMap mMap;
+    private TrackGPS gps;
     private double mlatitude, mlongitude;
     private double mMylatitude, mMylongitude;
     private String mName;
     private ImageView skyImage;
-    private LocationManager locationManager;
-
+    LocationManager locationManager;
+    ArrayList<LatLng> markerPoints;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,44 +68,44 @@ public class GpsActivity extends FragmentActivity
         mlongitude = b.getDouble(Constant.LONGITUDE);
         mName = b.getString(Constant.BARNAME);
         getTimeFromAndroid();
-        //  mGoogleApiClient = new GoogleApiClient.Builder(this)
-        //      .addConnectionCallbacks(this)
-        //     .addOnConnectionFailedListener(this)
-        //     .addApi(LocationServices.API)
-        //    .build();
-
-        // checkLocation();
-
     }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        checkLocation();
         mMap = googleMap;
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setCompassEnabled(false);
         mMap.setBuildingsEnabled(true);
+
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         LatLng mPosition = new LatLng(mlatitude, mlongitude);
-        //   LatLng mMyPosition = new LatLng(mMylatitude, mMylongitude);
+        LatLng mMyPosition = new LatLng(mMylatitude, mMylongitude);
         mMap.addMarker(
                 new MarkerOptions()
                         .position(mPosition)
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_beer))
                         .title(mName));
-        // mMap.addMarker(
-        //       new MarkerOptions()
-        //             .position(mMyPosition)
-        //            .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_beer))
-        //           .title(mName));
+        mMap.addMarker(
+                new MarkerOptions()
+                        .position(mMyPosition)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_person))
+                        .title(mName));
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(mPosition)
-                .zoom(15.5f)
+                .zoom(25.5f)
                 .bearing(300)
                 .tilt(50)
                 .build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        String url = getDirectionsUrl(mMyPosition, mPosition);
+
+        DownloadTask downloadTask = new DownloadTask();
+
+        // Start downloading json data from Google Directions API
+        downloadTask.execute(url);
     }
 
     private void getTimeFromAndroid() {
@@ -119,126 +129,208 @@ public class GpsActivity extends FragmentActivity
         }
     }
 
-    //  @Override
-    // public void onConnected(Bundle bundle) {
-    //    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-    // return;
-    //}
+    private boolean checkLocation() {
+        if (!isLocationEnabled()) {
+            showAlert();
+        } else {
+            gps = new TrackGPS(GpsActivity.this);
+            if (gps.canGetLocation()) {
+                mMylongitude = gps.getLongitude();
+                mMylatitude = gps.getLatitude();
+                // Toast.makeText(getApplicationContext(),"ho",Toast.LENGTH_SHORT).show();
+            } else {
+                // gps.showSettingsAlert();
+            }
+        }
+        return isLocationEnabled();
+    }
 
-    //startLocationUpdates();
+    private void showAlert() {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Habilitar Gps")
+                .setMessage(" Tu Ubicacion esta Inactiva")
+                .setPositiveButton("Ir a Ajustes Gps", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                        Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(myIntent);
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface paramDialogInterface, int paramInt) {
 
-    // mLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                    }
+                });
+        dialog.show();
+    }
 
-    // if (mLocation == null) {
-    //     startLocationUpdates();
-    // }
-    // if (mLocation != null) {
+    private boolean isLocationEnabled() {
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
 
-    //   mMylatitude = mLocation.getLatitude();
-    //   mMylongitude = mLocation.getLongitude();
-    // } else {
-    //     Toast.makeText(this, "Ubicacio no Detectada", Toast.LENGTH_SHORT).show();
-    // }
-    // }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gps.stopUsingGPS();
+    }
 
-    // @Override
-    // public void onConnectionSuspended(int i) {
-    //     Log.i(TAG, "Conecion Suspendida");
-    //     mGoogleApiClient.connect();
-    // }
+    private String getDirectionsUrl(LatLng origin, LatLng dest) {
 
-    // @Override
-    // public void onConnectionFailed(ConnectionResult connectionResult) {
-    //     Log.i(TAG, "Fallo la Coneccion Error:" + connectionResult.getErrorCode());
-    // }
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
 
-    // @Override
-    // protected void onStart() {
-    //      super.onStart();
-    //     if (mGoogleApiClient != null) {
-    //         mGoogleApiClient.connect();
-    //     }
-    // }
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
 
-    // @Override
-    // protected void onStop() {
-    //   super.onStop();
-    //   if (mGoogleApiClient.isConnected()) {
-    //      mGoogleApiClient.disconnect();
-    //  }
-    // }
+        // Sensor enabled
+        String sensor = "sensor=false";
 
-    // protected void startLocationUpdates() {
-        // Create the location request
-    //    mLocationRequest = LocationRequest.create()
-    //         .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-    //        .setInterval(UPDATE_INTERVAL)
-    //       .setFastestInterval(FASTEST_INTERVAL);
-        // Request location updates
-    // if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-    //  return;
-    // }
-    // LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
-    //          mLocationRequest, this);
-    //  Log.d("reque", "--->>>>");
-    //}
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + sensor;
 
-    // @Override
-    //  public void onLocationChanged(Location location) {
-    //    String msg = "Updated Location: " +
-    //            Double.toString(location.getLatitude()) + "," +
-    //           Double.toString(location.getLongitude());
-    //   mMylatitude = location.getLatitude();
-    //   mMylongitude = location.getLongitude();
-    // Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        // You can now create a LatLng Object for use with maps
-    //  LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-    //   }
+        // Output format
+        String output = "json";
 
-    //private boolean checkLocation() {
-    //     if (!isLocationEnabled())
-    //        showAlert();
-    //     return isLocationEnabled();
-    // }
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
 
-    // private void showAlert() {
-    // final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-    // dialog.setTitle("habilitar Gps")
-    //        .setMessage(" Tu Ubicacion esta Inactiva")
-    //     .setPositiveButton("Ir a Ajustes Gps", new DialogInterface.OnClickListener() {
-    //@Override
-    //   public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+        return url;
+    }
 
-    //            Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-    //            startActivity(myIntent);
-    //        }
-    //  })
-    //  .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-    //     @Override
-    //     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+    /**
+     * A method to download json data from url
+     */
+    private String downloadUrl(String strUrl) throws IOException {
+        String data = "";
+        InputStream iStream = null;
+        HttpURLConnection urlConnection = null;
+        try {
+            URL url = new URL(strUrl);
 
-    //     }
-    //   });
-    // dialog.show();
-    //  }
+            // Creating an http connection to communicate with url
+            urlConnection = (HttpURLConnection) url.openConnection();
 
-    // private boolean isLocationEnabled() {
-    //     locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    //    return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-    //            locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    //}
+            // Connecting to url
+            urlConnection.connect();
+
+            // Reading data from url
+            iStream = urlConnection.getInputStream();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
+
+            StringBuffer sb = new StringBuffer();
+
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+            data = sb.toString();
+
+            br.close();
+
+        } catch (Exception e) {
+
+        } finally {
+            iStream.close();
+            urlConnection.disconnect();
+        }
+        return data;
+    }
+
+    // Fetches data from url passed
+    private class DownloadTask extends AsyncTask<String, Void, String> {
+
+        // Downloading data in non-ui thread
+        @Override
+        protected String doInBackground(String... url) {
+
+            // For storing data from web service
+            String data = "";
+
+            try {
+                // Fetching the data from web service
+                data = downloadUrl(url[0]);
+            } catch (Exception e) {
+                Log.d("Background Task", e.toString());
+            }
+            return data;
+        }
+
+        // Executes in UI thread, after the execution of
+        // doInBackground()
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            ParserTask parserTask = new ParserTask();
+
+            // Invokes the thread for parsing the JSON data
+            parserTask.execute(result);
+        }
+    }
+
+    /**
+     * A class to parse the Google Places in JSON format
+     */
+    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+
+        // Parsing the data in non-ui thread
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
+
+            JSONObject jObject;
+            List<List<HashMap<String, String>>> routes = null;
+
+            try {
+                jObject = new JSONObject(jsonData[0]);
+                DirectionsJSONParser parser = new DirectionsJSONParser();
+
+                // Starts parsing data
+                routes = parser.parse(jObject);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return routes;
+        }
+
+        // Executes in UI thread, after the parsing process
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+            ArrayList<LatLng> points = null;
+            PolylineOptions lineOptions = null;
+            MarkerOptions markerOptions = new MarkerOptions();
+
+            // Traversing through all the routes
+            for (int i = 0; i < result.size(); i++) {
+                points = new ArrayList<LatLng>();
+                lineOptions = new PolylineOptions();
+
+                // Fetching i-th route
+                List<HashMap<String, String>> path = result.get(i);
+
+                // Fetching all the points in i-th route
+                for (int j = 0; j < path.size(); j++) {
+                    HashMap<String, String> point = path.get(j);
+
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+
+                    points.add(position);
+                }
+
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points);
+                lineOptions.width(2);
+                lineOptions.color(Color.RED);
+            }
+
+            // Drawing polyline in the Google Map for the i-th route
+            mMap.addPolyline(lineOptions);
+        }
+    }
 }

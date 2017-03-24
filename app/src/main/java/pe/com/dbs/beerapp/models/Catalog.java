@@ -3,7 +3,6 @@ package pe.com.dbs.beerapp.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -19,13 +18,15 @@ public class Catalog implements Serializable {
 
     private Integer state;
 
-    private BigDecimal unitPrice;
+    private double unitPrice = 0.0;
 
     private Integer barId;
 
     private Integer productId;
 
     private Product product;
+
+    private Integer cantidad = 0;
 
     public Integer getCatalogId() {
         return catalogId;
@@ -59,11 +60,11 @@ public class Catalog implements Serializable {
         this.state = state;
     }
 
-    public BigDecimal getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -90,5 +91,14 @@ public class Catalog implements Serializable {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    public Integer getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
+    }
+
 
 }

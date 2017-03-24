@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.androidnetworking.widget.ANImageView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
@@ -18,8 +17,7 @@ import pe.com.dbs.beerapp.models.Catalog;
 
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
 
-    private List<Catalog> catalogs;
-    public static ArrayList<String> objCabecera = new ArrayList<>();
+    public List<Catalog> catalogs;
     public CatalogAdapter(List<Catalog> catalogs) {
         this.catalogs = catalogs;
     }
@@ -35,13 +33,17 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder viewHolder, int index) {
         final Catalog catalog = catalogs.get(index);
         viewHolder.productName.setText(catalog.getProduct().getProductName());
-        viewHolder.productPrice.setText("S/." + catalog.getUnitPrice().toString());
+        viewHolder.productPrice.setText(catalog.getUnitPrice().toString());
         viewHolder.productImageView.setImageUrl(catalog.getProduct().getImage());
+        viewHolder.numberProduct.setText("0");
         viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int numberProduct = Integer.parseInt(viewHolder.numberProduct.getText().toString());
                 onClickCheckBox(1, numberProduct, viewHolder.checkBox, viewHolder.numberProduct);
+                double price = Double.parseDouble(viewHolder.numberProduct.getText().toString()) * Double.parseDouble(viewHolder.productPrice.getText().toString());
+                catalogs.get(viewHolder.getAdapterPosition()).setUnitPrice((Double.parseDouble(viewHolder.numberProduct.getText().toString()) >= 0.0) ? price : 0.0);
+                catalogs.get(viewHolder.getAdapterPosition()).setCantidad((Integer.parseInt(viewHolder.numberProduct.getText().toString()) >= 0) ? (Integer.parseInt(viewHolder.numberProduct.getText().toString())) : 0);
             }
         });
         viewHolder.numberProduct.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +51,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
             public void onClick(View v) {
                 int numberProduct = Integer.parseInt(viewHolder.numberProduct.getText().toString()) + 1;
                 onClickCheckBox(0, numberProduct, viewHolder.checkBox, viewHolder.numberProduct);
-
-
+                double price = Double.parseDouble(viewHolder.numberProduct.getText().toString()) * Double.parseDouble(viewHolder.productPrice.getText().toString());
+                catalogs.get(viewHolder.getAdapterPosition()).setUnitPrice((Double.parseDouble(viewHolder.numberProduct.getText().toString()) >= 0.0) ? price : 0.0);
+                catalogs.get(viewHolder.getAdapterPosition()).setCantidad((Integer.parseInt(viewHolder.numberProduct.getText().toString()) >= 0) ? (Integer.parseInt(viewHolder.numberProduct.getText().toString())) : 0);
             }
         });
         viewHolder.downButton.setOnClickListener(new View.OnClickListener() {
@@ -58,20 +61,23 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
             public void onClick(View v) {
                 int numberProduct = Integer.parseInt(viewHolder.numberProduct.getText().toString()) - 1;
                 onClickCheckBox(0, numberProduct, viewHolder.checkBox, viewHolder.numberProduct);
-
+                double price = Double.parseDouble(viewHolder.numberProduct.getText().toString()) * Double.parseDouble(viewHolder.productPrice.getText().toString());
+                catalogs.get(viewHolder.getAdapterPosition()).setUnitPrice((Double.parseDouble(viewHolder.numberProduct.getText().toString()) >= 0.0) ? price : 0.0);
+                catalogs.get(viewHolder.getAdapterPosition()).setCantidad((Integer.parseInt(viewHolder.numberProduct.getText().toString()) >= 0) ? (Integer.parseInt(viewHolder.numberProduct.getText().toString())) : 0);
             }
         });
     }
+
 
     public void onClickCheckBox(int tipo, int Number, CheckBox checkBox, TextView numberProduct) {
         if (tipo == 0) {
             if (Number == 0) {
                 checkBox.setChecked(false);
-                numberProduct.setText(Number + "");
+                numberProduct.setText(String.valueOf(Number));
             }
             if (Number > 0) {
                 checkBox.setChecked(true);
-                numberProduct.setText(Number + "");
+                numberProduct.setText(String.valueOf(Number));
             }
             if (Number < 0) {
                 checkBox.setChecked(false);
@@ -110,7 +116,5 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
             downButton = (ImageView) v.findViewById(R.id.downButton);
             numberProduct = (TextView) v.findViewById(R.id.numberProduct);
         }
-
     }
-
 }

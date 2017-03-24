@@ -1,7 +1,11 @@
 package pe.com.dbs.beerapp.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -9,9 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-
 import java.util.List;
+import java.util.Objects;
 
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.adapters.CatalogAdapter;
@@ -22,8 +25,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class CatalogActivity extends AbstractActivity {
 
+    private CatalogAdapter catalogAdapter;
+    private String number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +37,10 @@ public class CatalogActivity extends AbstractActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         Bundle bundle = getIntent().getExtras();
+        number = bundle.getString(Constant.NUMBER);
         CatalogService catalogService = retrofit.create(CatalogService.class);
         Call<List<Catalog>> call = catalogService.findByBar(bundle.getInt(Constant.BAR_ID));
-
         call.enqueue(new Callback<List<Catalog>>() {
 
             @Override
@@ -46,8 +51,8 @@ public class CatalogActivity extends AbstractActivity {
                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CatalogActivity.this);
                 recycler.setLayoutManager(layoutManager);
 
-                RecyclerView.Adapter adapter = new CatalogAdapter(response.body());
-                recycler.setAdapter(adapter);
+                catalogAdapter = new CatalogAdapter(response.body());
+                recycler.setAdapter(catalogAdapter);
             }
 
             @Override
@@ -67,12 +72,46 @@ public class CatalogActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.order:
-                JSONArray arr_strJson = new JSONArray(CatalogAdapter.objCabecera);
-                showSnackBar(arr_strJson.toString());
-                return true;
+
+                if (Objects.equals(total(), "0.0")) {
+                    showSnackBar("Seleccione sus Bebidas");
+                } else {
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                    dialog.setTitle("Proforma de la Venta")
+                            .setMessage("Tu presuepuesto seria de  S/." + total())
+                            .setPositiveButton("Llamar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                    dialContactPhone(number);
+                                }
+                            })
+                            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                    paramDialogInterface.dismiss();
+                                }
+                            });
+                    dialog.show();
+                    return true;
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void dialContactPhone(final String phoneNumber) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null)));
+    }
+
+    private String total() {
+        double total = 0.0;
+
+        for (int i = 0; i < catalogAdapter.catalogs.size(); i++) {
+            if (catalogAdapter.catalogs.get(i).getCantidad() > 0) {
+                total += catalogAdapter.catalogs.get(i).getUnitPrice();
+            }
+        }
+        return String.valueOf(total);
     }
 
     private void showSnackBar(String msg) {

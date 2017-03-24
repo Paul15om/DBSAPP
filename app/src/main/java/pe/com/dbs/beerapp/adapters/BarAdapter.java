@@ -2,7 +2,6 @@ package pe.com.dbs.beerapp.adapters;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,13 +50,13 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         viewHolder.address.setText(bar.getAddress());
         viewHolder.phone.setText(bar.getPhone());
         viewHolder.imageView.setImageUrl(bar.getImage());
-
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(Constant.BAR_ID, bar.getBarId());
+                bundle.putString(Constant.NUMBER, bar.getPhone());
                 Intent intent = new Intent(v.getContext(), CatalogActivity.class);
                 intent.putExtras(bundle);
                 v.getContext().startActivity(intent);
@@ -76,7 +75,6 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
                 v.getContext().startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -84,13 +82,11 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         return getBars().size();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name;
         private TextView address;
         private TextView phone;
-        private CardView barCardView;
         private ANImageView imageView;
         private ImageButton gpsBar;
 
@@ -101,7 +97,6 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
             phone = (TextView) v.findViewById(R.id.barPhone);
             imageView = (ANImageView) v.findViewById(R.id.barImageView);
             gpsBar = (ImageButton) v.findViewById(R.id.gpsFromBar);
-            barCardView = (CardView) v.findViewById(R.id.barCardView);
         }
 
     }
