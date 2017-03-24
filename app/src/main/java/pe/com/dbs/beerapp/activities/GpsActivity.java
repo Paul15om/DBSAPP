@@ -94,8 +94,8 @@ public class GpsActivity extends FragmentActivity
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_person))
                         .title(mName));
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(mPosition)
-                .zoom(25.5f)
+                .target(mMyPosition)
+                .zoom(13.6f)
                 .bearing(300)
                 .tilt(50)
                 .build();
@@ -325,7 +325,7 @@ public class GpsActivity extends FragmentActivity
 
                 // Adding all the points in the route to LineOptions
                 lineOptions.addAll(points);
-                lineOptions.width(2);
+                lineOptions.width(7);
                 lineOptions.color(Color.RED);
             }
 

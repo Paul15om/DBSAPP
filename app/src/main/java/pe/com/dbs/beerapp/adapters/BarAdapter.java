@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidnetworking.widget.ANImageView;
@@ -88,7 +88,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         private TextView address;
         private TextView phone;
         private ANImageView imageView;
-        private ImageButton gpsBar;
+        private ImageView gpsBar;
 
         public ViewHolder(View v) {
             super(v);
@@ -96,7 +96,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
             address = (TextView) v.findViewById(R.id.barAddress);
             phone = (TextView) v.findViewById(R.id.barPhone);
             imageView = (ANImageView) v.findViewById(R.id.barImageView);
-            gpsBar = (ImageButton) v.findViewById(R.id.gpsFromBar);
+            gpsBar = (ImageView) v.findViewById(R.id.gpsFromBar);
         }
 
     }
