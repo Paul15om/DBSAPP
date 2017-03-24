@@ -2,16 +2,13 @@ package pe.com.dbs.beerapp.activities;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.orm.SugarRecord;
 
@@ -28,10 +25,6 @@ import retrofit2.Response;
 
 public class BarActivity extends AbstractActivity {
 
-    protected LocationManager locationManager;
-    boolean isGPSEnabled = false;
-    boolean isNetworkEnabled = false;
-    boolean canGetLocation = false;
     private List<Bar> bars;
     private RecyclerView.Adapter adapter;
 
@@ -42,11 +35,6 @@ public class BarActivity extends AbstractActivity {
         setToolbar();
         loadBars();
         searchBar("", 0);
-    }
-
-
-    public String Estado(boolean value) {
-        return String.valueOf(value);
     }
 
     private void setToolbar() {
@@ -74,10 +62,8 @@ public class BarActivity extends AbstractActivity {
     private void searchBar(String Text, int state) {
         List<Bar> Query = null;
         if (state == 1) {
-            Log.d("LogsAndroid", "Mensaje de depuración1");
             Query = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where name like '%" + Text + "%'");
         } else if (state != 1) {
-            Log.d("LogsAndroid", "Mensaje de depuración2");
             Query = SugarRecord.listAll(Bar.class);
         }
         RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
@@ -123,17 +109,6 @@ public class BarActivity extends AbstractActivity {
                 .show();
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.Location:
-                showSnackBar("Tu Posicion es 777");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
           /*  List<Bar> asdasd1 = SugarRecord.listAll(Bar.class);
 
             List<Bar> asdasd2 = Bar.listAll(Bar.class);

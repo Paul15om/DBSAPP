@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.util.List;
 
 import pe.com.dbs.beerapp.R;
@@ -29,7 +31,6 @@ public class CatalogActivity extends AbstractActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         Bundle bundle = getIntent().getExtras();
         CatalogService catalogService = retrofit.create(CatalogService.class);
@@ -58,7 +59,6 @@ public class CatalogActivity extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.catalog, menu);
         return true;
     }
@@ -67,7 +67,8 @@ public class CatalogActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.order:
-                showSnackBar("Tu Orden Esta en Proceso");
+                JSONArray arr_strJson = new JSONArray(CatalogAdapter.objCabecera);
+                showSnackBar(arr_strJson.toString());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -75,9 +76,7 @@ public class CatalogActivity extends AbstractActivity {
     }
 
     private void showSnackBar(String msg) {
-        Snackbar
-                .make(findViewById(R.id.coordinator), msg, Snackbar.LENGTH_LONG)
+        Snackbar.make(findViewById(R.id.coordinator), msg, Snackbar.LENGTH_LONG)
                 .show();
     }
-
 }

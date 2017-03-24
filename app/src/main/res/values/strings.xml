@@ -25,5 +25,6 @@
     <string name="loading">Cargando</string>
     <string name="Search">Buscando</string>
     <string name="title_activity_catalog"></string>
+    <string name="title_activity_gps">GPS</string>
 
 </resources>

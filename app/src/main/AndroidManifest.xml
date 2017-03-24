@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
         <meta-data
@@ -62,6 +65,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pe.com.dbs.beerapp.activities.BarActivity" />
         </activity>
-    </application>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".activities.GpsActivity"
+            android:label="@string/title_activity_gps">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pe.com.dbs.beerapp.activities.BarActivity" />
+        </activity>
+    </application>
 </manifest>

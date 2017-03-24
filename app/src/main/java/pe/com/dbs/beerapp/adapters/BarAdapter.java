@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.androidnetworking.widget.ANImageView;
@@ -15,12 +16,10 @@ import java.util.List;
 
 import pe.com.dbs.beerapp.R;
 import pe.com.dbs.beerapp.activities.CatalogActivity;
+import pe.com.dbs.beerapp.activities.GpsActivity;
 import pe.com.dbs.beerapp.constants.Constant;
 import pe.com.dbs.beerapp.models.Bar;
 
-/**
- * Created by JeralBenites on 25/02/2017.
- */
 public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
 
     private List<Bar> bars;
@@ -29,11 +28,11 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         this.setBars(bars);
     }
 
-    public List<Bar> getBars() {
+    private List<Bar> getBars() {
         return bars;
     }
 
-    public void setBars(List<Bar> bars) {
+    private void setBars(List<Bar> bars) {
         this.bars = bars;
     }
 
@@ -53,7 +52,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         viewHolder.phone.setText(bar.getPhone());
         viewHolder.imageView.setImageUrl(bar.getImage());
 
-        viewHolder.barCardView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -65,6 +64,19 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
             }
 
         });
+        viewHolder.gpsBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putDouble(Constant.LATITUDE, Double.parseDouble(bar.getLatitude().toString()));
+                bundle.putDouble(Constant.LONGITUDE, Double.parseDouble(bar.getLongitude().toString()));
+                bundle.putString(Constant.BARNAME, bar.getName());
+                Intent intent = new Intent(v.getContext(), GpsActivity.class);
+                intent.putExtras(bundle);
+                v.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -80,6 +92,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
         private TextView phone;
         private CardView barCardView;
         private ANImageView imageView;
+        private ImageButton gpsBar;
 
         public ViewHolder(View v) {
             super(v);
@@ -87,6 +100,7 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
             address = (TextView) v.findViewById(R.id.barAddress);
             phone = (TextView) v.findViewById(R.id.barPhone);
             imageView = (ANImageView) v.findViewById(R.id.barImageView);
+            gpsBar = (ImageButton) v.findViewById(R.id.gpsFromBar);
             barCardView = (CardView) v.findViewById(R.id.barCardView);
         }
 

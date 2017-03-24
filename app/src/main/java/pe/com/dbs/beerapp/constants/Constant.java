@@ -12,4 +12,7 @@ public final class Constant {
 
     public static final String BAR_ID = "barId";
 
+    public static String LATITUDE = "latitude";
+    public static String LONGITUDE = "longitude";
+    public static String BARNAME = "barname";
 }
