@@ -55,7 +55,6 @@ public class CatalogActivity extends AbstractActivity {
                 catalogAdapter = new CatalogAdapter(response.body());
                 recycler.setAdapter(catalogAdapter);
             }
-
             @Override
             public void onFailure(Call<List<Catalog>> call, Throwable t) {
                 Toast.makeText(CatalogActivity.this, "Login error", Toast.LENGTH_LONG).show();
@@ -73,20 +72,19 @@ public class CatalogActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.order:
-
                 if (Objects.equals(total(), "0.0")) {
-                    showSnackBar("Seleccione sus Bebidas");
+                    showSnackBar(getString(R.string.title_alert_product_Negative));
                 } else {
                     final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                    dialog.setTitle("Proforma de la Venta")
-                            .setMessage("Tu presuepuesto seria de  S/." + total())
-                            .setPositiveButton("Llamar", new DialogInterface.OnClickListener() {
+                    dialog.setTitle(getString(R.string.title_alert_product))
+                            .setMessage(getString(R.string.text_product) + total())
+                            .setPositiveButton(getString(R.string.opcion1), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface paramDialogInterface, int paramInt) {
                                     dialContactPhone(number);
                                 }
                             })
-                            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            .setNegativeButton(getString(R.string.opcion2), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface paramDialogInterface, int paramInt) {
                                     paramDialogInterface.dismiss();
