@@ -36,4 +36,10 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
 
+    <string name="title_alert_product">Proforma de la Venta</string>
+    <string name="title_alert_product_Negative">Seleccione sus Bebidas</string>
+    <string name="text_product">Tu presuepuesto seria de  S/ </string>
+    <string name="opcion1">LLAMAR</string>
+    <string name="opcion2">CANCELAR</string>
+
 </resources>
