@@ -104,13 +104,16 @@ public class GpsActivity extends FragmentActivity
         Calendar c = Calendar.getInstance();
         c.setTime(dt);
         int hours = c.get(Calendar.HOUR_OF_DAY);
-        if (hours >= 1 && hours <= 12) {
+        if (hours >= 5 && hours <= 12) {
             Bitmap bImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.skymor);
             skyImage.setImageBitmap(bImage);
-        } else if (hours >= 12 && hours <= 16) {
+        } else if (hours >= 12 && hours <= 17) {
             Bitmap bImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.skyaft);
             skyImage.setImageBitmap(bImage);
-        } else if (hours >= 16 && hours <= 24) {
+        } else if (hours >= 17 && hours <= 24) {
+            Bitmap bImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.skynight);
+            skyImage.setImageBitmap(bImage);
+        } else if (hours >= 0 && hours <= 5) {
             Bitmap bImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.skynight);
             skyImage.setImageBitmap(bImage);
         }
