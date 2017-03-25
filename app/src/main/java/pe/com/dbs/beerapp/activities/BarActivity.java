@@ -63,7 +63,7 @@ public class BarActivity extends AbstractActivity {
     private void searchBar(String Text, int state) {
         List<Bar> Query = null;
         if (state == 1) {
-            Query = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where name like '%" + Text + "%'");
+            Query = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where address like '%" + Text + "%'");
         } else if (state != 1) {
             Query = SugarRecord.listAll(Bar.class);
         }
