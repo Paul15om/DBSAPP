@@ -40,7 +40,6 @@ public class DirectionsJSONParser {
                         String polyline = (String) ((JSONObject) ((JSONObject) jSteps.get(k)).get(POLYLINE)).get(POINTS);
                         List<LatLng> list = decodePoly(polyline);
 
-                        /** Traversing all points */
                         for (int l = 0; l < list.size(); l++) {
                             HashMap<String, String> hm = new HashMap<>();
                             hm.put(LATITUDE, Double.toString(list.get(l).latitude));
@@ -55,6 +54,7 @@ public class DirectionsJSONParser {
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return routes;
@@ -93,4 +93,5 @@ public class DirectionsJSONParser {
 
         return poly;
     }
+    
 }

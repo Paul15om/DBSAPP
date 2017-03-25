@@ -2,9 +2,6 @@ package pe.com.dbs.beerapp.constants;
 
 public final class Constant {
 
-    private Constant() {
-    }
-
     public static final String AUTH_TOKEN = "D0f8f007";
 
     public static String authToken;
@@ -20,5 +17,8 @@ public final class Constant {
     public static final long MIN_TIME_BW_UPDATES = 1000 * 60;
     public static final String SENSOR = "sensor=false";
     public static final String OUTPUT = "json";
+
+    private Constant() {
+    }
 
 }
