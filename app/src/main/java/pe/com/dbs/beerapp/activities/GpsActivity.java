@@ -49,7 +49,6 @@ public class GpsActivity extends FragmentActivity
     private double mMylatitude, mMylongitude;
     private String mName;
     private ImageView skyImage;
-    private LocationManager locationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +119,7 @@ public class GpsActivity extends FragmentActivity
         }
     }
 
-    private boolean checkLocation() {
+    private void checkLocation() {
         gps = new TrackGPS(GpsActivity.this);
         if (gps.canGetLocation()) {
             mMylongitude = gps.getLongitude();
@@ -128,11 +127,10 @@ public class GpsActivity extends FragmentActivity
         } else {
             gps.showSettingsAlert();
         }
-        return gps.canGetLocation();
     }
 
     private boolean isLocationEnabled() {
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }

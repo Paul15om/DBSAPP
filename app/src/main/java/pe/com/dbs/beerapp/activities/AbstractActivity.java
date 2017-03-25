@@ -8,10 +8,17 @@ import retrofit2.Retrofit;
 
 public abstract class AbstractActivity extends AppCompatActivity {
 
-    public static Retrofit retrofit;
+    private static Retrofit retrofit;
 
     public AbstractActivity() {
-        retrofit = RetrofitFactory.getRetrofit();
+        setRetrofit(RetrofitFactory.getRetrofit());
     }
 
+    public static Retrofit getRetrofit() {
+        return retrofit;
+    }
+
+    public static void setRetrofit(Retrofit retrofit) {
+        AbstractActivity.retrofit = retrofit;
+    }
 }

@@ -17,6 +17,8 @@ import pe.com.dbs.beerapp.models.Catalog;
 
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
 
+    private static final String ZERO = "0";
+
     public final List<Catalog> catalogs;
 
     public CatalogAdapter(List<Catalog> catalogs) {
@@ -36,7 +38,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
         viewHolder.productName.setText(catalog.getProduct().getProductName());
         viewHolder.productPrice.setText(catalog.getUnitPrice().toString());
         viewHolder.productImageView.setImageUrl(catalog.getProduct().getImage());
-        viewHolder.numberProduct.setText("0");
+        viewHolder.numberProduct.setText(ZERO);
         viewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
