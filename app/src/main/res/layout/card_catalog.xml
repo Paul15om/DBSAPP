@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="S/."
+                android:text="S/"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/money"
                 android:layout_centerVertical="true"
