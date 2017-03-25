@@ -24,9 +24,6 @@ import retrofit2.Response;
 
 public class SignUp extends DialogFragment {
 
-    public SignUp() {
-    }
-
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return createLoginDialog();
     }

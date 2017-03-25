@@ -19,10 +19,8 @@ import pe.com.dbs.beerapp.constants.Constant;
 public class TrackGPS extends Service implements LocationListener {
 
     private final Context mContext;
-    private boolean checkGPS = false;
-    private boolean checkNetwork = false;
     private boolean canGetLocation = false;
-    private Location loc;
+    private Location location;
     private double latitude;
     private double longitude;
     private LocationManager locationManager;
@@ -32,13 +30,13 @@ public class TrackGPS extends Service implements LocationListener {
         getLocation();
     }
 
-    private Location getLocation() {
+    private void getLocation() {
         try {
             locationManager = (LocationManager) mContext
                     .getSystemService(LOCATION_SERVICE);
-            checkGPS = locationManager
+            boolean checkGPS = locationManager
                     .isProviderEnabled(LocationManager.GPS_PROVIDER);
-            checkNetwork = locationManager
+            boolean checkNetwork = locationManager
                     .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
             if (!checkGPS && !checkNetwork) {
                 Toast.makeText(mContext, getString(R.string.no_gps), Toast.LENGTH_SHORT).show();
@@ -52,12 +50,12 @@ public class TrackGPS extends Service implements LocationListener {
                                 Constant.MIN_TIME_BW_UPDATES,
                                 Constant.MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         if (locationManager != null) {
-                            loc = locationManager
+                            location = locationManager
                                     .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         }
-                        if (loc != null) {
-                            latitude = loc.getLatitude();
-                            longitude = loc.getLongitude();
+                        if (location != null) {
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
                         }
                     } catch (SecurityException e) {
                         Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -66,18 +64,18 @@ public class TrackGPS extends Service implements LocationListener {
             }
 
             if (checkGPS) {
-                if (loc == null) {
+                if (location == null) {
                     try {
                         locationManager.requestLocationUpdates(
                                 LocationManager.GPS_PROVIDER,
                                 Constant.MIN_TIME_BW_UPDATES,
                                 Constant.MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         if (locationManager != null) {
-                            loc = locationManager
+                            location = locationManager
                                     .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                            if (loc != null) {
-                                latitude = loc.getLatitude();
-                                longitude = loc.getLongitude();
+                            if (location != null) {
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
                             }
                         }
                     } catch (SecurityException e) {
@@ -89,19 +87,18 @@ public class TrackGPS extends Service implements LocationListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return loc;
     }
 
     public double getLongitude() {
-        if (loc != null) {
-            longitude = loc.getLongitude();
+        if (location != null) {
+            longitude = location.getLongitude();
         }
         return longitude;
     }
 
     public double getLatitude() {
-        if (loc != null) {
-            latitude = loc.getLatitude();
+        if (location != null) {
+            latitude = location.getLatitude();
         }
         return latitude;
     }

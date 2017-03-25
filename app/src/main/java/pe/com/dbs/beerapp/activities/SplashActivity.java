@@ -10,6 +10,7 @@ import pe.com.dbs.beerapp.R;
 
 
 public class SplashActivity extends AbstractActivity {
+
     private ProgressBar progressBar;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,5 @@ public class SplashActivity extends AbstractActivity {
     private void startApp() {
         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
     }
-
 
 }

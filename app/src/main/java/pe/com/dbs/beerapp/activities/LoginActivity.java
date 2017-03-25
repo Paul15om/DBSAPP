@@ -117,8 +117,6 @@ public class LoginActivity extends AppCompatActivity {
                 new SignUp().show(fragmentManager, "Sign Up");
             }
         });
-        emailLogin.setText("george@dbs.com");
-        passwordLogin.setText("1234");
     }
 
     private boolean isOnline() {

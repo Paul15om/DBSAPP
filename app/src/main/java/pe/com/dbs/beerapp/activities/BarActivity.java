@@ -44,7 +44,7 @@ public class BarActivity extends AbstractActivity {
     }
 
     private void loadBars() {
-        BarService barService = retrofit.create(BarService.class);
+        BarService barService = getRetrofit().create(BarService.class);
         Call<List<Bar>> call = barService.findAll();
         call.enqueue(new Callback<List<Bar>>() {
             @Override
@@ -107,18 +107,7 @@ public class BarActivity extends AbstractActivity {
     }
 
     private void showSnackBar(String msg) {
-        Snackbar
-                .make(findViewById(R.id.coordinator), msg, Snackbar.LENGTH_LONG)
-                .show();
+        Snackbar.make(findViewById(R.id.coordinator), msg, Snackbar.LENGTH_LONG).show();
     }
-
-          /*  List<Bar> asdasd1 = SugarRecord.listAll(Bar.class);
-
-            List<Bar> asdasd2 = Bar.listAll(Bar.class);
-
-            List<Bar> SASDD = Bar.find(Bar.class, "id = ?", "232");
-
-            Bar asdasd = Bar.find(Bar.class, "id = ?", "232").get(0);*/
-
 
 }

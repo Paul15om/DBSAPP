@@ -40,7 +40,7 @@ public class CatalogActivity extends AbstractActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Bundle bundle = getIntent().getExtras();
         number = bundle.getString(Constant.NUMBER);
-        CatalogService catalogService = retrofit.create(CatalogService.class);
+        CatalogService catalogService = getRetrofit().create(CatalogService.class);
         Call<List<Catalog>> call = catalogService.findByBar(bundle.getInt(Constant.BAR_ID));
         call.enqueue(new Callback<List<Catalog>>() {
 
@@ -55,9 +55,10 @@ public class CatalogActivity extends AbstractActivity {
                 catalogAdapter = new CatalogAdapter(response.body());
                 recycler.setAdapter(catalogAdapter);
             }
+
             @Override
             public void onFailure(Call<List<Catalog>> call, Throwable t) {
-                Toast.makeText(CatalogActivity.this, "Login error", Toast.LENGTH_LONG).show();
+                Toast.makeText(CatalogActivity.this, "Catalog error", Toast.LENGTH_LONG).show();
             }
         });
     }
