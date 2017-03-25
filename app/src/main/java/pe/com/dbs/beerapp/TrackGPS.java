@@ -32,12 +32,10 @@ public class TrackGPS extends Service implements LocationListener {
 
     private void getLocation() {
         try {
-            locationManager = (LocationManager) mContext
-                    .getSystemService(LOCATION_SERVICE);
-            boolean checkGPS = locationManager
-                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
-            boolean checkNetwork = locationManager
-                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+            boolean checkGPS = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            boolean checkNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
             if (!checkGPS && !checkNetwork) {
                 Toast.makeText(mContext, getString(R.string.no_gps), Toast.LENGTH_SHORT).show();
             } else {
@@ -49,10 +47,11 @@ public class TrackGPS extends Service implements LocationListener {
                                 LocationManager.NETWORK_PROVIDER,
                                 Constant.MIN_TIME_BW_UPDATES,
                                 Constant.MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+
                         if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         }
+
                         if (location != null) {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
@@ -71,8 +70,7 @@ public class TrackGPS extends Service implements LocationListener {
                                 Constant.MIN_TIME_BW_UPDATES,
                                 Constant.MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                         if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             if (location != null) {
                                 latitude = location.getLatitude();
                                 longitude = location.getLongitude();
