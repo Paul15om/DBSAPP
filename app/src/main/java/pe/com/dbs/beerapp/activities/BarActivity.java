@@ -32,6 +32,7 @@ public class BarActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar);
+        SugarRecord.deleteAll(Bar.class);
         setToolbar();
         loadBars();
         searchBar("", 0);
@@ -48,7 +49,7 @@ public class BarActivity extends AbstractActivity {
         call.enqueue(new Callback<List<Bar>>() {
             @Override
             public void onResponse(Call<List<Bar>> call, Response<List<Bar>> response) {
-                SugarRecord.deleteAll(Bar.class);
+
                 bars = response.body();
                 SugarRecord.saveInTx(bars);
             }
@@ -64,7 +65,7 @@ public class BarActivity extends AbstractActivity {
         List<Bar> Query = null;
         if (state == 1) {
             Query = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where address like '%" + Text + "%'");
-        } else if (state != 1) {
+        } else {
             Query = SugarRecord.listAll(Bar.class);
         }
         RecyclerView recycler = (RecyclerView) findViewById(R.id.barRecycler);
