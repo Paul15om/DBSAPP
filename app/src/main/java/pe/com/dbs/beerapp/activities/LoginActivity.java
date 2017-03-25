@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordLogin;
     private CallbackManager callbackManager;
     private Boolean status = false;
-    LoginService loginService;
+    private LoginService loginService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +194,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private class BackgroundTask extends AsyncTask<Call<Void>, Void, Void> {
 
-        private ProgressDialog dialog;
+        private final ProgressDialog dialog;
 
         BackgroundTask(LoginActivity activity) {
             this.dialog = new ProgressDialog(activity);

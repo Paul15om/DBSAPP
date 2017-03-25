@@ -84,11 +84,11 @@ public class BarAdapter extends RecyclerView.Adapter<BarAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView name;
-        private TextView address;
-        private TextView phone;
-        private ANImageView imageView;
-        private ImageView gpsBar;
+        private final TextView name;
+        private final TextView address;
+        private final TextView phone;
+        private final ANImageView imageView;
+        private final ImageView gpsBar;
 
         public ViewHolder(View v) {
             super(v);

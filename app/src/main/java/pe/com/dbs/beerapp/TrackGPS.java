@@ -19,13 +19,14 @@ import pe.com.dbs.beerapp.constants.Constant;
 public class TrackGPS extends Service implements LocationListener {
 
     private final Context mContext;
-    boolean checkGPS = false;
-    boolean checkNetwork = false;
-    boolean canGetLocation = false;
-    Location loc;
-    double latitude;
-    double longitude;
-    protected LocationManager locationManager;
+    private boolean checkGPS = false;
+    private boolean checkNetwork = false;
+    private boolean canGetLocation = false;
+    private Location loc;
+    private double latitude;
+    private double longitude;
+    private LocationManager locationManager;
+
     public TrackGPS(Context mContext) {
         this.mContext = mContext;
         getLocation();

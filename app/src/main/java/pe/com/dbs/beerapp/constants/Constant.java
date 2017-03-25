@@ -12,14 +12,14 @@ public final class Constant {
 
     public static final String BAR_ID = "barId";
 
-    public static String LATITUDE = "latitude";
-    public static String LONGITUDE = "longitude";
-    public static String BARNAME = "barname";
-    public static String NUMBER = "number";
+    public static final String LATITUDE = "latitude";
+    public static final String LONGITUDE = "longitude";
+    public static final String BARNAME = "barname";
+    public static final String NUMBER = "number";
 
-    public static String URL_GPS = "https://maps.googleapis.com/maps/api/directions/";
-    public static long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    public static long MIN_TIME_BW_UPDATES = 1000 * 60;
-    public static String SENSOR = "sensor=false";
-    public static String OUTPUT = "json";
+    public static final String URL_GPS = "https://maps.googleapis.com/maps/api/directions/";
+    public static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+    public static final long MIN_TIME_BW_UPDATES = 1000 * 60;
+    public static final String SENSOR = "sensor=false";
+    public static final String OUTPUT = "json";
 }

@@ -30,6 +30,7 @@ public class CatalogActivity extends AbstractActivity {
 
     private CatalogAdapter catalogAdapter;
     private String number;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

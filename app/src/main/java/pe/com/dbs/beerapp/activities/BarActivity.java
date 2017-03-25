@@ -52,6 +52,7 @@ public class BarActivity extends AbstractActivity {
                 bars = response.body();
                 SugarRecord.saveInTx(bars);
             }
+
             @Override
             public void onFailure(Call<List<Bar>> call, Throwable t) {
 
@@ -62,7 +63,7 @@ public class BarActivity extends AbstractActivity {
     private void searchBar(String Text, int state) {
         List<Bar> Query = null;
         if (state == 1) {
-            Query = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where name like '%" + Text + "%'");
+            Query = SugarRecord.findWithQuery(Bar.class, "Select * from Bar where address like '%" + Text + "%'");
         } else if (state != 1) {
             Query = SugarRecord.listAll(Bar.class);
         }
@@ -73,6 +74,7 @@ public class BarActivity extends AbstractActivity {
         RecyclerView.Adapter adapter = new BarAdapter(Query);
         recycler.setAdapter(adapter);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
