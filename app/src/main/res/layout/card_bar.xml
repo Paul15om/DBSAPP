@@ -48,14 +48,11 @@
             android:id="@+id/barPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="3"
             android:text="Small Text"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#666"
             android:textSize="14sp"
-            android:layout_marginStart="40dp"
             android:layout_alignBaseline="@+id/barAddress"
-            android:layout_alignBottom="@+id/barAddress"
             android:layout_toEndOf="@+id/barName" />
 
         <ImageView
