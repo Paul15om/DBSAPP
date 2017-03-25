@@ -24,6 +24,9 @@ import retrofit2.Response;
 
 public class SignUp extends DialogFragment {
 
+    private static final String SCRIPT = "-";
+    private static final String FORMAT_MONTH_OR_DAY ="%02d";
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         return createLoginDialog();
     }
@@ -49,7 +52,15 @@ public class SignUp extends DialogFragment {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                dateBornSingUp.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                                StringBuilder date = new StringBuilder(10);
+
+                                date.append(year)
+                                        .append(SCRIPT)
+                                        .append(String.format(FORMAT_MONTH_OR_DAY, monthOfYear + 1))
+                                        .append(SCRIPT)
+                                        .append(String.format(FORMAT_MONTH_OR_DAY, dayOfMonth));
+
+                                dateBornSingUp.setText(date.toString());
                             }
                         }, YEAR_18, c.get(Calendar.MONTH), c.get(Calendar.DATE));
                 dpd.show();
@@ -65,6 +76,7 @@ public class SignUp extends DialogFragment {
                         Customer customer = new Customer();
                         customer.setEmail(email);
                         customer.setPass(pass);
+
                         customer.setBirthDate(birth);
                         CustomerService customerService = RetrofitFactory.getRetrofitLogin().create(CustomerService.class);
                         Call<Void> call = customerService.save(customer);
