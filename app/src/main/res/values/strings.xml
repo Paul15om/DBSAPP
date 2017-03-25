@@ -27,4 +27,13 @@
     <string name="title_activity_catalog"></string>
     <string name="title_activity_gps">GPS</string>
 
+    <string name="title_alert_gps">Habilitar Gps</string>
+    <string name="error_gps">Tu Ubicacion esta Inactiva</string>
+    <string name="activate_Gps">Ir a Ajustes Gps</string>
+    <string name="no_gps">No hay proveedor de servicios disponible</string>
+
+    <string name="cancel">Cancelar</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+
 </resources>
