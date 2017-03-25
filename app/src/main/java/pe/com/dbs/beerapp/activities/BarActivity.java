@@ -52,6 +52,7 @@ public class BarActivity extends AbstractActivity {
                 bars = response.body();
                 SugarRecord.saveInTx(bars);
             }
+
             @Override
             public void onFailure(Call<List<Bar>> call, Throwable t) {
 
@@ -73,6 +74,7 @@ public class BarActivity extends AbstractActivity {
         RecyclerView.Adapter adapter = new BarAdapter(Query);
         recycler.setAdapter(adapter);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

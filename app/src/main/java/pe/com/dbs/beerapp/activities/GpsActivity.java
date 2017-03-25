@@ -49,7 +49,8 @@ public class GpsActivity extends FragmentActivity
     private double mMylatitude, mMylongitude;
     private String mName;
     private ImageView skyImage;
-    LocationManager locationManager;
+    private LocationManager locationManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,7 +156,7 @@ public class GpsActivity extends FragmentActivity
         urlConnection.connect();
         try (InputStream iStream = urlConnection.getInputStream()) {
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
                 sb.append(line);

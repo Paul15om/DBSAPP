@@ -17,7 +17,8 @@ import pe.com.dbs.beerapp.models.Catalog;
 
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
 
-    public List<Catalog> catalogs;
+    public final List<Catalog> catalogs;
+
     public CatalogAdapter(List<Catalog> catalogs) {
         this.catalogs = catalogs;
     }
@@ -69,7 +70,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
     }
 
 
-    public void onClickCheckBox(int tipo, int Number, CheckBox checkBox, TextView numberProduct) {
+    private void onClickCheckBox(int tipo, int Number, CheckBox checkBox, TextView numberProduct) {
         if (tipo == 0) {
             if (Number == 0) {
                 checkBox.setChecked(false);
@@ -93,6 +94,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
             }
         }
     }
+
     @Override
     public int getItemCount() {
         return catalogs.size();
@@ -100,12 +102,12 @@ public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView productName;
-        private TextView productPrice;
-        private ANImageView productImageView;
-        private CheckBox checkBox;
-        private ImageView downButton;
-        private TextView numberProduct;
+        private final TextView productName;
+        private final TextView productPrice;
+        private final ANImageView productImageView;
+        private final CheckBox checkBox;
+        private final ImageView downButton;
+        private final TextView numberProduct;
 
         public ViewHolder(View v) {
             super(v);

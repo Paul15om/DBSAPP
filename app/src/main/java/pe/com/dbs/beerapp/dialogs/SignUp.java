@@ -82,6 +82,7 @@ public class SignUp extends DialogFragment {
                                     dismiss();
                                 }
                             }
+
                             @Override
                             public void onFailure(Call<Void> call, Throwable t) {
                                 //Toast.makeText(v.getContext(), "entre3", Toast.LENGTH_LONG).show();
